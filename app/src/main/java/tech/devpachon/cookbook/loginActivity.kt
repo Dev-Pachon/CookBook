@@ -1,8 +1,7 @@
-package tech.devpachon.cookbook.viewmodel
+package tech.devpachon.cookbook
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import tech.devpachon.cookbook.R
 
 class loginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
