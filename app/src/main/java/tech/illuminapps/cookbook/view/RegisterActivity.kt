@@ -1,11 +1,12 @@
-package tech.devpachon.cookbook
+package tech.illuminapps.cookbook.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import tech.illuminapps.cookbook.R
 
-class profileActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_register)
     }
 }

@@ -1,4 +1,4 @@
-package tech.devpachon.cookbook
+package tech.illuminapps.cookbook
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

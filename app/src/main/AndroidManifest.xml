@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="tech.devpachon.cookbook">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -14,20 +13,17 @@
         android:theme="@style/Theme.CookBook"
         tools:targetApi="31">
         <activity
-            android:name=".profileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".registerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".loginActivity"
+            android:name=".view.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".viewmodel.loginActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

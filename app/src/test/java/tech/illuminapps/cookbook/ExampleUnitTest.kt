@@ -1,4 +1,4 @@
-package tech.devpachon.cookbook
+package tech.illuminapps.cookbook
 
 import org.junit.Test
 
