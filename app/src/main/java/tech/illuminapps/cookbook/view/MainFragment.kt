@@ -24,6 +24,8 @@ class MainFragment : Fragment() {
     }
 
     private lateinit var homeFragment: HomeFragment
+    private lateinit var savedRecipesFragment: SavedRecipesFragment
+    private lateinit var notificationFragment: NotificationFragment
 
 
     override fun onCreateView(
@@ -31,10 +33,13 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         homeFragment = HomeFragment.newInstance(mainActivity)
+        savedRecipesFragment = SavedRecipesFragment.newInstance(mainActivity)
+        notificationFragment = NotificationFragment.newInstance(mainActivity)
+
         mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
 
         binding.floatingActionButton.setOnClickListener{
-            startActivity(Intent(binding.root.context, DetailedRecipeActivity::class.java))
+            startActivity(Intent(binding.root.context, RecipeActivity::class.java))
         }
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
@@ -44,15 +49,15 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.page_2 -> {
-                    mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
+                    mainActivity.showFragment(savedRecipesFragment, binding.fragmentContainerView.id)
                     true
                 }
                 R.id.page_3 -> {
-                    startActivity(Intent(binding.root.context, RecipeActivity::class.java))
+                    mainActivity.showFragment(notificationFragment, binding.fragmentContainerView.id)
                     true
                 }
                 R.id.page_4 -> {
-                    Toast.makeText(binding.root.context,"Aquí",Toast.LENGTH_LONG).show()
+
                     true
                 }
                 else -> false

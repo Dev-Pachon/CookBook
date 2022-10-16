@@ -249,52 +249,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/myProfilePhotoCV" />
 
-
-            <TextView
-                android:id="@+id/textView132"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="48dp"
-                android:text="Comentarios"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/myProfilePhotoCV2"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginTop="16dp"
-                app:cardCornerRadius="21dp"
-                app:layout_constraintStart_toStartOf="@+id/textView132"
-                app:layout_constraintTop_toBottomOf="@+id/textView132">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:srcCompat="@tools:sample/avatars" />
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="TextView"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/myProfilePhotoCV2"
-                app:layout_constraintStart_toEndOf="@+id/myProfilePhotoCV2"
-                app:layout_constraintTop_toTopOf="@+id/myProfilePhotoCV2" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/myProfilePhotoCV2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
