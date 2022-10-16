@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityMainBinding
 import tech.illuminapps.cookbook.viewmodel.AuthResult
+import tech.illuminapps.cookbook.viewmodel.AuthState
 import tech.illuminapps.cookbook.viewmodel.FirstInit
 import tech.illuminapps.cookbook.viewmodel.UserViewModel
 
@@ -51,8 +53,7 @@ class MainActivity : AppCompatActivity() {
                                 showFragment(loginFragment)
                             }
                             else -> {
-                                Toast
-                                    .makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+                                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
                                     .show()
                             }
                         }
@@ -65,6 +66,11 @@ class MainActivity : AppCompatActivity() {
     fun showFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(binding.fragmentCV.id, fragment)
+        transaction.commit()
+    }
+    fun showFragment(fragment: Fragment, fragmentContainerID:Int) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(fragmentContainerID, fragment)
         transaction.commit()
     }
 }

@@ -1,30 +1,67 @@
 package tech.illuminapps.cookbook.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
+import com.google.android.material.navigation.NavigationBarView
 import tech.illuminapps.cookbook.R
+import tech.illuminapps.cookbook.databinding.FragmentMainBinding
+import tech.illuminapps.cookbook.viewmodel.UserViewModel
 
 class MainFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: MainActivity? = null
+
+    private lateinit var mainActivity: MainActivity
+
+    private var userViewModel: UserViewModel = UserViewModel()
+
+    val binding: FragmentMainBinding by lazy {
+        FragmentMainBinding.inflate(layoutInflater)
+    }
+
+    private lateinit var homeFragment: HomeFragment
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        homeFragment = HomeFragment.newInstance(mainActivity)
+        mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
+
+        binding.floatingActionButton.setOnClickListener{
+            startActivity(Intent(binding.root.context, RecipeActivity::class.java))
+        }
+
+        NavigationBarView.OnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.page_1 -> {
+                    mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
+                    true
+                }
+                R.id.page_2 -> {
+                    mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
+                    true
+                }
+                R.id.page_3 -> {
+                    mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
+                    true
+                }
+                else -> false
+            }
+        }
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return binding.root
     }
 
     companion object {
         @JvmStatic
         fun newInstance(mainActivity: MainActivity) = MainFragment().apply {
-            arguments = Bundle().apply {
-                param1 = mainActivity
-            }
+            this.mainActivity = mainActivity
         }
     }
 }

@@ -5,13 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.FragmentSecondInitBinding
 import tech.illuminapps.cookbook.databinding.FragmentThirdInitBinding
 
 
 class ThirdInitFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private lateinit var mainActivity: MainActivity
     private lateinit var loginFragment: LoginFragment
     val binding: FragmentThirdInitBinding by lazy {

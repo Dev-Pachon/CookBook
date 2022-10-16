@@ -13,6 +13,7 @@ class SecondInitFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var mainActivity: MainActivity
     private lateinit var thirdInitFragment: ThirdInitFragment
+    private lateinit var loginFragment: LoginFragment
     val binding: FragmentSecondInitBinding by lazy {
         FragmentSecondInitBinding.inflate(layoutInflater)
     }
@@ -23,9 +24,14 @@ class SecondInitFragment : Fragment() {
     ): View? {
 
         thirdInitFragment = ThirdInitFragment.newInstance(mainActivity)
+        loginFragment = LoginFragment.newInstance(mainActivity)
 
         binding.nextBtn.setOnClickListener {
             mainActivity.showFragment(thirdInitFragment)
+        }
+
+        binding.omitirBtn.setOnClickListener {
+            mainActivity.showFragment(loginFragment)
         }
 
         // Inflate the layout for this fragment
