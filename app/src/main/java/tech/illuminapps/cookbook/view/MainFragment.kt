@@ -26,6 +26,7 @@ class MainFragment : Fragment() {
     private lateinit var homeFragment: HomeFragment
     private lateinit var savedRecipesFragment: SavedRecipesFragment
     private lateinit var notificationFragment: NotificationFragment
+    private lateinit var profileFragment: MyProfileFragment
 
 
     override fun onCreateView(
@@ -35,6 +36,7 @@ class MainFragment : Fragment() {
         homeFragment = HomeFragment.newInstance(mainActivity)
         savedRecipesFragment = SavedRecipesFragment.newInstance(mainActivity)
         notificationFragment = NotificationFragment.newInstance(mainActivity)
+        profileFragment = MyProfileFragment.newInstance(mainActivity)
 
         mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
 
@@ -57,7 +59,7 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.page_4 -> {
-
+                    mainActivity.showFragment(profileFragment, binding.fragmentContainerView.id)
                     true
                 }
                 else -> false
