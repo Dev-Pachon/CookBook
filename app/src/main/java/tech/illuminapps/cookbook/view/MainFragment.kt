@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.navigation.NavigationBarView
 import tech.illuminapps.cookbook.R
@@ -33,10 +34,10 @@ class MainFragment : Fragment() {
         mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
 
         binding.floatingActionButton.setOnClickListener{
-            startActivity(Intent(binding.root.context, RecipeActivity::class.java))
+            startActivity(Intent(binding.root.context, DetailedRecipeActivity::class.java))
         }
 
-        NavigationBarView.OnItemSelectedListener { item ->
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.page_1 -> {
                     mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
@@ -47,7 +48,11 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.page_3 -> {
-                    mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
+                    startActivity(Intent(binding.root.context, RecipeActivity::class.java))
+                    true
+                }
+                R.id.page_4 -> {
+                    Toast.makeText(binding.root.context,"Aquí",Toast.LENGTH_LONG).show()
                     true
                 }
                 else -> false

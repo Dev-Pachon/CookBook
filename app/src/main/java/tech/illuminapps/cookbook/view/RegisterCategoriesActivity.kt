@@ -20,7 +20,9 @@ class RegisterCategoriesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        binding.finishBtn.setOnClickListener {
+            finish()
+        }
 
         var chip: Chip = Chip(binding.root.context)
         chip.text = "Holiwi"

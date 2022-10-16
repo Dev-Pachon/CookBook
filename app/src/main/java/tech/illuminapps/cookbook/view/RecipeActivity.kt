@@ -1,5 +1,6 @@
 package tech.illuminapps.cookbook.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import tech.illuminapps.cookbook.databinding.ActivityRecipeBinding
@@ -12,7 +13,10 @@ class RecipeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.firstStar.background.level = 400
         setContentView(binding.root)
+
+        binding.startRecipeBtn.setOnClickListener {
+            startActivity(Intent(binding.root.context, DetailedRecipeActivity::class.java))
+        }
     }
 }

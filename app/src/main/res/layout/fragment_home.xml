@@ -79,20 +79,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
-                        android:text="TextView"
+                        android:text="Tendencias"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textView6"
+                        app:layout_constraintEnd_toStartOf="@+id/moreBtn"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/moreBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
-                        android:text="TextView"
+                        android:text="Ver más"
                         app:layout_constraintBottom_toBottomOf="@+id/textView7"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -108,9 +108,19 @@
                     android:layout_marginEnd="1dp">
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/tendencesRV"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                 </HorizontalScrollView>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/materialDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:dividerInsetEnd="16dp"
+                    app:dividerInsetStart="16dp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -123,20 +133,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
-                        android:text="TextView"
+                        android:text="Perfiles populares"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textView8"
+                        app:layout_constraintEnd_toStartOf="@+id/morePropilesBtn"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/morePropilesBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
-                        android:text="TextView"
+                        android:text="Ver más"
                         app:layout_constraintBottom_toBottomOf="@+id/textView11"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -152,6 +162,7 @@
                     android:layout_marginEnd="1dp">
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/popularProfilesRV"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
                 </HorizontalScrollView>
@@ -165,6 +176,7 @@
                     app:dividerInsetStart="16dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/feedRV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
