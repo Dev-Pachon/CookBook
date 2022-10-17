@@ -25,10 +25,12 @@ class RegisterCategoriesActivity : AppCompatActivity() {
             finish()
         }
 
-        var chip: Chip = Chip(binding.root.context)
-        chip.text = "Holiwi"
-        binding.chipGroup.addView(chip)
-        setContentView(binding.root)
+        for (x in 1..20){
+            val chip = Chip(binding.root.context)
+            chip.text = "Holiwi"
+            binding.chipGroup.addView(chip)
+            setContentView(binding.root)
+        }
     }
 
     override fun onBackPressed(){

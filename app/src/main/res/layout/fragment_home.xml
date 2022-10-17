@@ -53,11 +53,12 @@
             app:layout_constraintStart_toEndOf="@+id/NombreTI"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView3"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,6 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
                         android:text="Ver más"
+                        android:textColor="@color/red_700"
                         app:layout_constraintBottom_toBottomOf="@+id/textView7"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -100,25 +102,28 @@
                         app:layout_constraintTop_toTopOf="@+id/textView7" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <HorizontalScrollView
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/horizontalScrollView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginEnd="1dp">
+                    android:layout_height="match_parent">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/tendencesRV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                </HorizontalScrollView>
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/materialDivider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginVertical="10dp"
                     app:dividerInsetEnd="16dp"
                     app:dividerInsetStart="16dp" />
 
@@ -136,18 +141,19 @@
                         android:fontFamily="More Fonts..."
                         android:text="Perfiles populares"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/morePropilesBtn"
+                        app:layout_constraintEnd_toStartOf="@+id/moreProfilesBtn"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/morePropilesBtn"
+                        android:id="@+id/moreProfilesBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
                         android:text="Ver más"
+                        android:textColor="@color/red_700"
                         app:layout_constraintBottom_toBottomOf="@+id/textView11"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -155,34 +161,39 @@
                         app:layout_constraintTop_toTopOf="@+id/textView11" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="397dp"
-                    android:layout_height="329dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/horizontalScrollView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="1dp"
                     android:layout_marginEnd="1dp">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/popularProfilesRV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                </HorizontalScrollView>
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginVertical="10dp"
                     app:dividerInsetEnd="16dp"
                     app:dividerInsetStart="16dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/feedRV"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
-        </ScrollView>
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
