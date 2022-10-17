@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Inicia Sesion"
-        android:textColor="#2335E2"
+        android:textColor="@color/red_700"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

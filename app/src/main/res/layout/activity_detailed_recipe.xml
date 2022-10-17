@@ -7,7 +7,7 @@
     tools:context=".view.DetailedRecipeActivity">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/iconButton"
+        android:id="@+id/backBtn"
         style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iconButton">
+        app:layout_constraintTop_toBottomOf="@+id/backBtn">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

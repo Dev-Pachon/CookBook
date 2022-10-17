@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
         mainActivity.showFragment(homeFragment, binding.fragmentContainerView.id)
 
         binding.floatingActionButton.setOnClickListener{
-            startActivity(Intent(binding.root.context, RecipeActivity::class.java))
+            startActivity(Intent(binding.root.context, CreateRecipeActivity::class.java))
         }
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->

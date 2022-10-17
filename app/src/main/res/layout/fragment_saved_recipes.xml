@@ -25,19 +25,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
+            android:id="@+id/NombreTI"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:hint="Search recipe"
-            app:layout_constraintBottom_toBottomOf="@+id/iconButton"
-            app:layout_constraintEnd_toStartOf="@+id/iconButton"
+            app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+            app:layout_constraintEnd_toStartOf="@+id/backBtn"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/iconButton"
+            app:layout_constraintTop_toTopOf="@+id/backBtn"
             app:passwordToggleEnabled="false"
             app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large"
             app:startIconDrawable="@drawable/search">
@@ -52,7 +52,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/iconButton"
+            android:id="@+id/backBtn"
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             app:iconTint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textInputLayout2"
+            app:layout_constraintStart_toEndOf="@+id/NombreTI"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -74,6 +74,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/NombreTI" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -7,16 +7,20 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.viewModels
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.FragmentMyProfileBinding
+import tech.illuminapps.cookbook.viewmodel.UserViewModel
 
 
 class MyProfileFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
     private lateinit var loginFragment: LoginFragment
+    private val userViewModel: UserViewModel by viewModels()
 
 
     val binding: FragmentMyProfileBinding by lazy {
@@ -51,6 +55,7 @@ class MyProfileFragment : Fragment() {
         popup.setOnMenuItemClickListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.logout_option -> {
+                    userViewModel.logOut(requireActivity())
                     mainActivity.showFragment(loginFragment)
                     true
                 }

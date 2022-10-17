@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import tech.illuminapps.cookbook.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
@@ -34,5 +35,16 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun onResult(result:ActivityResult){
 
+    }
+
+    override fun onBackPressed(){
+        MaterialAlertDialogBuilder(binding.root.context)
+            .setTitle("Descartar?")
+            .setMessage("Está seguro de que quiere descartar los cambios?\nPerderá todo el progreso realizado.")
+            .setNeutralButton("Cancelar") { _, _ -> }
+            .setPositiveButton("Descartar") { _, _ ->
+                super.onBackPressed()
+            }
+            .show()
     }
 }

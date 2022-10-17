@@ -1,34 +1,23 @@
 package tech.illuminapps.cookbook.view
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import androidx.annotation.RequiresApi
-import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import tech.illuminapps.cookbook.R
-import tech.illuminapps.cookbook.databinding.ActivityRegisterBinding
-import tech.illuminapps.cookbook.databinding.ActivityRegisterCategoriesBinding
+import tech.illuminapps.cookbook.databinding.ActivityCreateRecipeBinding
 
-class RegisterCategoriesActivity : AppCompatActivity() {
+class CreateRecipeActivity : AppCompatActivity() {
 
-    val binding: ActivityRegisterCategoriesBinding by lazy {
-        ActivityRegisterCategoriesBinding.inflate(layoutInflater)
+    val binding: ActivityCreateRecipeBinding by lazy {
+        ActivityCreateRecipeBinding.inflate(layoutInflater)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding.finishBtn.setOnClickListener {
-            finish()
-        }
-
-        var chip: Chip = Chip(binding.root.context)
-        chip.text = "Holiwi"
-        binding.chipGroup.addView(chip)
         setContentView(binding.root)
+
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     override fun onBackPressed(){
@@ -36,6 +25,7 @@ class RegisterCategoriesActivity : AppCompatActivity() {
             .setTitle("Descartar?")
             .setMessage("Está seguro de que quiere descartar los cambios?\nPerderá todo el progreso realizado.")
             .setNeutralButton("Cancelar") { _, _ -> }
+            .setNegativeButton("Guardar receta") { _, _ -> }
             .setPositiveButton("Descartar") { _, _ ->
                 super.onBackPressed()
             }

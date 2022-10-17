@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        userViewModel.setPreferences(this)
+
         loginFragment = LoginFragment.newInstance(this)
         firstInitFragment = FirstInitFragment.newInstance(this)
         mainFragment = MainFragment.newInstance(this)
-
-        userViewModel.testing()
 
         userViewModel.authState.observe(this) { authState ->
             when (authState.result) {

@@ -50,7 +50,7 @@
 
         <Button
             android:id="@+id/nextBtn"
-            style="@style/Widget.Material3.Button.IconButton.Filled"
+            style="@style/Widget.Material3.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="96dp"

@@ -36,6 +36,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -43,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Hoy"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -66,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Anteriores"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
