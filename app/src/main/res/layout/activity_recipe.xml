@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -218,8 +218,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/myProfilePhotoCV"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="21dp"
                 app:layout_constraintStart_toStartOf="@+id/textView13"
@@ -236,22 +236,48 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:text="TextView"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/myProfilePhotoCV"
                 app:layout_constraintStart_toEndOf="@+id/myProfilePhotoCV"
                 app:layout_constraintTop_toTopOf="@+id/myProfilePhotoCV" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/NombreTI"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/myProfilePhotoCV"
+                app:layout_constraintTop_toBottomOf="@+id/myProfilePhotoCV"
+                app:passwordToggleEnabled="false"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/send">
+
+                <EditText
+                    android:hint="Añadir comentario"
+                    android:id="@+id/editTextTextSearchRecipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/commentsRV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/myProfilePhotoCV" />
+                app:layout_constraintTop_toBottomOf="@id/NombreTI" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

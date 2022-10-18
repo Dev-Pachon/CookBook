@@ -7,8 +7,12 @@ import android.view.MenuItem
 import android.view.View
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityRecipeBinding
+import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
+import tech.illuminapps.cookbook.viewmodel.RecipeCommentAdapter
 
 class RecipeActivity : AppCompatActivity() {
 
@@ -16,12 +20,32 @@ class RecipeActivity : AppCompatActivity() {
         ActivityRecipeBinding.inflate(layoutInflater)
     }
 
+    private lateinit var layoutMComments : LinearLayoutManager
+
+    private lateinit var adapterComments : RecipeCommentAdapter
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        layoutMComments = LinearLayoutManager(binding.root.context)
+        binding.commentsRV.layoutManager = layoutMComments
+        binding.commentsRV.setHasFixedSize(true)
+        adapterComments = RecipeCommentAdapter()
+        binding.commentsRV.adapter = adapterComments
+
+        for (i in 1..10){
+            val comment = Comment("img1.jps", "Carlos Jimmy","",10,"askldhlkashdas")
+            adapterComments.addComment(comment)
+        }
+
         binding.startRecipeBtn.setOnClickListener {
             startActivity(Intent(binding.root.context, DetailedRecipeActivity::class.java))
+        }
+
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
         }
 
         binding.menuBtn.setOnClickListener {

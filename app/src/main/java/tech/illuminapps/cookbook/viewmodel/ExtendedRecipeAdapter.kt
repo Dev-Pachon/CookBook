@@ -1,13 +1,18 @@
 package tech.illuminapps.cookbook.viewmodel
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import tech.illuminapps.cookbook.R
+import tech.illuminapps.cookbook.databinding.ViewHolderNotificationBinding
 import tech.illuminapps.cookbook.databinding.ViewHolderRecipeExpandedBinding
+import tech.illuminapps.cookbook.view.ProfileActivity
 import tech.illuminapps.cookbook.view.Recipe
+import tech.illuminapps.cookbook.view.RecipeActivity
 import tech.illuminapps.cookbook.view.ViewHolderExtendedRecipe
 
 class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
@@ -25,7 +30,7 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderExtendedRecipe {
         context = parent.context
 
-        binding = ViewHolderRecipeExpandedBinding.inflate(LayoutInflater.from(parent.context))
+        binding = ViewHolderRecipeExpandedBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
         handleSave()
 
@@ -34,15 +39,31 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
 
     override fun onBindViewHolder(holder: ViewHolderExtendedRecipe, position: Int) {
         binding.saveRecipeBtn.setOnClickListener {
-            handleSave()
+            Toast.makeText(binding.root.context,"Receta guardada", Toast.LENGTH_LONG).show()
         }
+        binding.RecipeCV.setOnClickListener {
+            ContextCompat.startActivity(
+                binding.root.context,
+                Intent(binding.root.context, RecipeActivity::class.java),
+                null
+            )
+        }
+
+        binding.authorGroup.setOnClickListener{
+            ContextCompat.startActivity(
+                binding.root.context,
+                Intent(binding.root.context, ProfileActivity::class.java),
+                null
+            )
+        }
+
     }
 
     override fun getItemCount(): Int {
         return recipes.size
     }
 
-    fun handleSave() {
+    private fun handleSave() {
         if (false) {
             binding.saveRecipeBtn.setBackgroundColor(
                 ContextCompat.getColor(

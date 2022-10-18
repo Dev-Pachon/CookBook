@@ -41,7 +41,6 @@ class UserViewModel : ViewModel() {
         _firstInit.value = SharedPreferences.InitState(activity)
         _authState.value = AuthState(SharedPreferences.AuthState(activity),"")
     }
-
 }
 
 data class AuthState(val result: AuthResult, val message: String)

@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FBC02D</color>
     <color name="transparent">#00000000</color>
+    <color name="green">#00bb00</color>
+    <color name="green_50">#4000BB00</color>
 </resources>

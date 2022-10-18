@@ -1,5 +1,6 @@
 package tech.illuminapps.cookbook.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -63,9 +64,9 @@ class HomeFragment : Fragment() {
             adapterExtendedRecipe.addRecipe(recipe)
         }
 
-        for (i in 10 downTo 1){
+        for (i in 1..5){
             val profile = PopularProfile("$i","Name$i" ,"image$i")
-            adapterPopularProfile.addRecipe(profile)
+            adapterPopularProfile.addProfile(profile)
         }
 
         // Inflate the layout for this fragment

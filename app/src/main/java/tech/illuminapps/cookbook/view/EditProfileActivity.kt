@@ -21,7 +21,6 @@ class EditProfileActivity : AppCompatActivity() {
             .setTitle("Descartar?")
             .setMessage("Está seguro de que quiere descartar los cambios?\nPerderá todo el progreso realizado.")
             .setNeutralButton("Cancelar") { _, _ -> }
-            .setNegativeButton("Guardar receta") { _, _ -> }
             .setPositiveButton("Descartar") { _, _ ->
                 super.onBackPressed()
             }
