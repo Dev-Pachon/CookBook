@@ -11,4 +11,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="ready_string">Listo</string>
+    <string name="go_back_string">Ir atrás</string>
+    <string name="ingredients_string">Ingredientes</string>
+    <string name="add_ingredient_string">Botón añadir ingrediente</string>
+    <string name="ingredient_string">Ingrediente</string>
+    <string name="quantity_string">Cantidad</string>
 </resources>

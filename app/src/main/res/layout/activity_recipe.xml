@@ -243,7 +243,7 @@
                 app:layout_constraintTop_toTopOf="@+id/myProfilePhotoCV" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/NombreTI"
+                android:id="@+id/contentTL"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -274,7 +274,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/NombreTI" />
+                app:layout_constraintTop_toBottomOf="@id/contentTL" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

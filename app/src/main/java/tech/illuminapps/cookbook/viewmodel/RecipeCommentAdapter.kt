@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ViewHolderCommentBinding
 import tech.illuminapps.cookbook.databinding.ViewHolderPopularProfilesBinding
+import tech.illuminapps.cookbook.databinding.ViewHolderRecipeExpandedBinding
 import tech.illuminapps.cookbook.view.Comment
 import tech.illuminapps.cookbook.view.PopularProfile
 import tech.illuminapps.cookbook.view.ViewHolderPopularProfile
@@ -28,7 +29,7 @@ class RecipeCommentAdapter : RecyclerView.Adapter<ViewHolderRecipeComment>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderRecipeComment {
         context = parent.context
 
-        binding = ViewHolderCommentBinding.inflate(LayoutInflater.from(parent.context))
+        binding = ViewHolderCommentBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
         return ViewHolderRecipeComment(binding.root)
     }

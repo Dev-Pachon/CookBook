@@ -10,9 +10,12 @@ import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.FragmentMyProfileBinding
+import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
 import tech.illuminapps.cookbook.viewmodel.UserViewModel
 
 
@@ -27,6 +30,10 @@ class MyProfileFragment : Fragment() {
         FragmentMyProfileBinding.inflate(layoutInflater)
     }
 
+    private lateinit var layoutMSaved : LinearLayoutManager
+
+    private lateinit var adapter :ExtendedRecipeAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +43,25 @@ class MyProfileFragment : Fragment() {
         binding.menuBtn.setOnClickListener {
             showMenu(binding.menuBtn, R.menu.profile_menu)
         }
+
+
+        layoutMSaved = LinearLayoutManager(binding.root.context)
+
+        binding.myRecipesRV.layoutManager = layoutMSaved
+
+        binding.myRecipesRV.setHasFixedSize(true)
+
+        adapter = ExtendedRecipeAdapter()
+
+
+        binding.myRecipesRV.adapter = adapter
+
+        for (i in 1..5){
+            val recipe = Recipe("img1.jps", ContextCompat.getDrawable(binding.root.context, R.drawable.cartoon_gc6b1d9dec_1280_1),null,null,true)
+
+            adapter.addRecipe(recipe)
+        }
+
         // Inflate the layout for this fragment
         return binding.root
     }

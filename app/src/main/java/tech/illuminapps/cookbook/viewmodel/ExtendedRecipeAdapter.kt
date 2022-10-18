@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ViewHolderNotificationBinding
@@ -32,12 +33,15 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
 
         binding = ViewHolderRecipeExpandedBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
-        handleSave()
-
         return ViewHolderExtendedRecipe(binding.root)
     }
 
     override fun onBindViewHolder(holder: ViewHolderExtendedRecipe, position: Int) {
+
+        if(recipes[position].isOwner){
+            binding.authorGroup.isGone = !binding.authorGroup.isGone
+        }
+
         binding.saveRecipeBtn.setOnClickListener {
             Toast.makeText(binding.root.context,"Receta guardada", Toast.LENGTH_LONG).show()
         }
@@ -61,31 +65,5 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
 
     override fun getItemCount(): Int {
         return recipes.size
-    }
-
-    private fun handleSave() {
-        if (false) {
-            binding.saveRecipeBtn.setBackgroundColor(
-                ContextCompat.getColor(
-                    context, R.color.red_700
-                )
-            )
-            binding.saveRecipeBtn.setTextColor(
-                ContextCompat.getColor(
-                    context, R.color.white
-                )
-            )
-        } else {
-            binding.saveRecipeBtn.setBackgroundColor(
-                ContextCompat.getColor(
-                    context, R.color.transparent
-                )
-            )
-            binding.saveRecipeBtn.setTextColor(
-                ContextCompat.getColor(
-                    context, R.color.red_700
-                )
-            )
-        }
     }
 }

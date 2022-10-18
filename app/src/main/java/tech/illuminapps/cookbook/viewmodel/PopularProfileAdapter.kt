@@ -25,7 +25,7 @@ class PopularProfileAdapter : RecyclerView.Adapter<ViewHolderPopularProfile>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderPopularProfile {
         context = parent.context
 
-        binding = ViewHolderPopularProfilesBinding.inflate(LayoutInflater.from(parent.context))
+        binding = ViewHolderPopularProfilesBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
         return ViewHolderPopularProfile(binding.root)
     }

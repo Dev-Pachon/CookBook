@@ -72,7 +72,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/profilePicCV" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/NombreTI"
+                android:id="@+id/contentTL"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -101,8 +101,8 @@
                 android:layout_marginTop="32dp"
                 android:text="Descripción"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/NombreTI"
-                app:layout_constraintTop_toBottomOf="@+id/NombreTI" />
+                app:layout_constraintStart_toStartOf="@+id/contentTL"
+                app:layout_constraintTop_toBottomOf="@+id/contentTL" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/descriptionTI"

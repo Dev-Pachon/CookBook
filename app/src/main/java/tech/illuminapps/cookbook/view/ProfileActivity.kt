@@ -13,5 +13,10 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 }
