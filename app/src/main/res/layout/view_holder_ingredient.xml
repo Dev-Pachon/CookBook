@@ -23,6 +23,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/ingredient_image_string"
             app:srcCompat="@drawable/capture" />
     </androidx.cardview.widget.CardView>
 
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        tools:text="Pan"
         app:layout_constraintBottom_toBottomOf="@+id/ingredientCV"
         app:layout_constraintEnd_toStartOf="@+id/quantityTV"
         app:layout_constraintStart_toEndOf="@+id/ingredientCV"
@@ -43,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="TextView"
+        tools:text="200g"
         app:layout_constraintBottom_toBottomOf="@+id/nameTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/nameTV" />

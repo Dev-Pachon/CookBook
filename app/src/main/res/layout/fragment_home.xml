@@ -11,13 +11,13 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/contentTL"
+            android:id="@+id/stepIL"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:hint="Search recipe"
+            android:hint="@string/search_recipe_string"
             app:layout_constraintBottom_toBottomOf="@+id/backBtn"
             app:layout_constraintEnd_toStartOf="@+id/backBtn"
             app:layout_constraintHorizontal_bias="0.5"
@@ -30,7 +30,7 @@
             >
 
             <EditText
-                android:id="@+id/editTextTextSearchRecipe"
+                android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -39,18 +39,18 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/backBtn"
+            android:id="@+id/filterBtn"
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:contentDescription="FilterButton"
+            android:contentDescription="@string/filter_btn_string"
             app:icon="@drawable/filter"
             app:iconTint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/contentTL"
+            app:layout_constraintStart_toEndOf="@+id/stepIL"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.NestedScrollView
@@ -62,7 +62,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contentTL">
+            app:layout_constraintTop_toBottomOf="@+id/stepIL">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
-                        android:text="Tendencias"
+                        android:text="@string/tendency_string"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/moreBtn"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
-                        android:text="Ver más"
+                        android:text="@string/more_btn_string"
                         android:textColor="@color/red_700"
                         app:layout_constraintBottom_toBottomOf="@+id/textView7"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
                         android:fontFamily="More Fonts..."
-                        android:text="Perfiles populares"
+                        android:text="@string/popular_profiles_string"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/moreProfilesBtn"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -152,7 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
-                        android:text="Ver más"
+                        android:text="@string/more_btn_string"
                         android:textColor="@color/red_700"
                         app:layout_constraintBottom_toBottomOf="@+id/textView11"
                         app:layout_constraintEnd_toEndOf="parent"

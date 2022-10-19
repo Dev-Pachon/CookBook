@@ -32,7 +32,7 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>() {
 
     override fun onBindViewHolder(holder: ViewHolderStep, position: Int) {
         val stepPos = steps[position].position
-        binding.contentTL.hint = "Paso ${stepPos}"
+        binding.stepIL.hint = "Paso ${stepPos}"
     }
 
     override fun getItemCount(): Int {

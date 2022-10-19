@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:text="Omitir"
+            android:text="@string/skip_string"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +38,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="96dp"
             android:layout_marginBottom="16dp"
-            android:text="Encuentra tu receta favorita"
+            android:text="@string/find_your_fav_recipe_string"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="96dp"
             android:layout_marginEnd="96dp"
-            android:text="Button"
+            android:text="@string/next_page_string"
             android:textColor="@color/white"
             app:backgroundTint="@color/red_700"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Busca la mejor receta para tu comida"
+            android:text="@string/find_best_recipe_string"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />

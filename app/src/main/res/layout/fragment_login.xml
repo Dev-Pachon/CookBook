@@ -18,7 +18,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo_1" />
+            app:srcCompat="@drawable/logo_1"
+            android:contentDescription="@string/app_logo_string" />
 
         <TextView
             android:id="@+id/textView25"
@@ -27,7 +28,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
-            android:text="Inicio de Sesion"
+            android:text="@string/login_string"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/emailIL"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -43,7 +44,7 @@
             android:layout_marginTop="64dp"
             android:layout_marginEnd="32dp"
             android:gravity="center"
-            android:hint="Correo Electronico"
+            android:hint="@string/email_string"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView25"
@@ -55,26 +56,28 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/contentTL"
+            android:id="@+id/stepIL"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:hint="Contraseña"
+            android:hint="@string/password_string"
+            android:labelFor="@id/editText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/emailIL"
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/passwordicon">
 
             <EditText
-                android:id="@+id/editTextTextPassword2"
+                android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,19 +86,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="¿No Tienes una Cuenta?"
+            android:text="@string/dont_have_account_string"
             app:layout_constraintEnd_toStartOf="@+id/registerBtn"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contentTL" />
+            app:layout_constraintTop_toBottomOf="@+id/stepIL" />
 
         <TextView
             android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Registrate"
+            android:text="@string/create_account_string"
             android:textColor="@color/red_700"
             app:layout_constraintBottom_toBottomOf="@+id/textView21"
             app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:text="Button"
+            android:text="@string/login_string"
             android:textColor="@color/white"
             app:backgroundTint="@color/red_700"
             app:layout_constraintBottom_toBottomOf="parent"

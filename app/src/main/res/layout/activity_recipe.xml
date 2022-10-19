@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/go_back_string"
         app:icon="@drawable/arrow_left"
         app:iconTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/more_btn_string"
         app:icon="@drawable/more"
         app:iconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +51,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-                android:text="TextView"
+                tools:text="Cómo hacer una Tostada Francesa"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,9 +71,10 @@
 
                 <ImageView
                     android:id="@+id/imageView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/recipe_image_string"
+                    app:srcCompat="@drawable/capture" />
             </androidx.cardview.widget.CardView>
 
             <ImageView
@@ -131,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="TextView"
+                tools:text="4,5"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/firstStar5"
                 app:layout_constraintStart_toEndOf="@+id/firstStar5"
@@ -142,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="TextView"
+                tools:text="(300) Reseñas"
                 app:layout_constraintBottom_toBottomOf="@+id/firstStar5"
                 app:layout_constraintStart_toEndOf="@+id/scoreTV"
                 app:layout_constraintTop_toTopOf="@+id/firstStar5"
@@ -160,7 +163,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:contentDescription="@string/user_image_string"
+                    app:srcCompat="@drawable/ic_launcher_foreground" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -168,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="TextView"
+                tools:text="Carlos Pantoja"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/authorPhotoCV"
                 app:layout_constraintStart_toEndOf="@+id/authorPhotoCV"
@@ -179,7 +183,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:text="Seguir"
+                android:text="@string/follow_string"
                 android:textColor="@color/red_700"
                 android:textSize="14sp"
                 app:backgroundTint="@color/white"
@@ -197,7 +201,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="48dp"
                 android:layout_marginEnd="32dp"
-                android:text="Empezar a cocinar!"
+                android:text="@string/start_cooking_string"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/red_700"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -210,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="48dp"
-                android:text="Comentarios"
+                android:text="@string/comments_string"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -228,14 +232,15 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:contentDescription="@string/user_image_string"
+                    app:srcCompat="@drawable/ic_launcher_foreground" />
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="TextView"
+                tools:text="Jhonny Deep"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/myProfilePhotoCV"
@@ -243,27 +248,32 @@
                 app:layout_constraintTop_toTopOf="@+id/myProfilePhotoCV" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contentTL"
+                android:id="@+id/commentIL"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="50"
+                app:endIconCheckable="false"
+                app:endIconDrawable="@drawable/send"
+                app:endIconMode="custom"
+                app:helperTextEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@+id/myProfilePhotoCV"
                 app:layout_constraintTop_toBottomOf="@+id/myProfilePhotoCV"
                 app:passwordToggleEnabled="false"
-                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/send">
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large">
 
                 <EditText
-                    android:hint="Añadir comentario"
-                    android:id="@+id/editTextTextSearchRecipe"
+                    android:id="@+id/editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/add_comment_string"
+                    android:inputType="textMultiLine"
                     tools:ignore="SpeakableTextPresentCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -272,9 +282,10 @@
                 android:id="@+id/commentsRV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/contentTL" />
+                app:layout_constraintTop_toBottomOf="@id/commentIL" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

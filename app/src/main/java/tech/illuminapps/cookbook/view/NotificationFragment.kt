@@ -16,10 +16,10 @@ class NotificationFragment : Fragment() {
     private lateinit var mainActivity: MainActivity
 
     private lateinit var layoutMTodayNotification : LinearLayoutManager
-    private lateinit var layoutMOldNotification : LinearLayoutManager
+    private lateinit var layoutMPreviousNotification : LinearLayoutManager
 
     private lateinit var adapterTodayNotification:NotificationAdapter
-    private lateinit var adapterOldNotification:NotificationAdapter
+    private lateinit var adapterPreviousNotification:NotificationAdapter
 
     val binding: FragmentNotificationBinding by lazy {
         FragmentNotificationBinding.inflate(layoutInflater)
@@ -30,24 +30,24 @@ class NotificationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         layoutMTodayNotification = LinearLayoutManager(binding.root.context)
-        layoutMOldNotification = LinearLayoutManager(binding.root.context)
+        layoutMPreviousNotification = LinearLayoutManager(binding.root.context)
 
         binding.todayNotificationRV.layoutManager = layoutMTodayNotification
-        binding.oldNotificationsRV.layoutManager = layoutMOldNotification
+        binding.previousNotificationsRV.layoutManager = layoutMPreviousNotification
 
         adapterTodayNotification = NotificationAdapter()
-        adapterOldNotification = NotificationAdapter()
+        adapterPreviousNotification = NotificationAdapter()
 
         binding.todayNotificationRV.adapter = adapterTodayNotification
-        binding.oldNotificationsRV.adapter = adapterOldNotification
+        binding.previousNotificationsRV.adapter = adapterPreviousNotification
 
         for (i in 1..3){
-            val notification = Notification(Date.from(Instant.now()), "Carlos Jimmy azX nuevo contenido $i","Ajiaco CalezCX",false)
+            val notification = Notification(Date.from(Instant.now()), "Carlos Jimmy publicó nuevo contenido $i","Ajiaco Caleño",false)
             adapterTodayNotification.addComment(notification)
         }
         for (i in 1..5){
-            val notification = Notification(Date.from(Instant.now()), "Carlos Jimmy azadiz nuevo contenido","Ajiaco Calezxcz $i",true)
-            adapterOldNotification.addComment(notification)
+            val notification = Notification(Date.from(Instant.now()), "Carlos Jimmy añañaí nuevo contenido","Ajiaco del Caribe $i",true)
+            adapterPreviousNotification.addComment(notification)
         }
 
         return binding.root

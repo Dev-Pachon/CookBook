@@ -31,12 +31,11 @@ class RecipeActivity : AppCompatActivity() {
 
         layoutMComments = LinearLayoutManager(binding.root.context)
         binding.commentsRV.layoutManager = layoutMComments
-        binding.commentsRV.setHasFixedSize(true)
         adapterComments = RecipeCommentAdapter()
         binding.commentsRV.adapter = adapterComments
 
         for (i in 1..10){
-            val comment = Comment("img1.jps", "Carlos Jimmy","",10,"askldhlkashdas")
+            val comment = Comment("img1.jpg", "Carlos Jimmy","",10,"askldhlkashdas")
             adapterComments.addComment(comment)
         }
 
@@ -50,6 +49,13 @@ class RecipeActivity : AppCompatActivity() {
 
         binding.menuBtn.setOnClickListener {
             showMenu(binding.menuBtn, R.menu.recipe_menu)
+        }
+
+        binding.commentIL.setEndIconOnClickListener {
+            val comment= Comment("", "Henry Cavil", "", 50,binding.commentIL.editText?.text.toString())
+            adapterComments.addComment(comment)
+            layoutMComments.smoothScrollToPosition(binding.commentsRV,null, 0)
+            binding.commentIL.editText?.text?.clear()
         }
     }
 

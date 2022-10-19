@@ -13,17 +13,18 @@ import tech.illuminapps.cookbook.view.Comment
 import tech.illuminapps.cookbook.view.PopularProfile
 import tech.illuminapps.cookbook.view.ViewHolderPopularProfile
 import tech.illuminapps.cookbook.view.ViewHolderRecipeComment
+import java.util.LinkedList
 
 class RecipeCommentAdapter : RecyclerView.Adapter<ViewHolderRecipeComment>() {
 
-    private val comments: ArrayList<Comment> = ArrayList()
+    private val comments: LinkedList<Comment> = LinkedList()
 
     private lateinit var context: Context
     private lateinit var binding: ViewHolderCommentBinding
 
     fun addComment(comment: Comment) {
-        comments.add(comment)
-        notifyItemInserted(itemCount)
+        comments.addFirst(comment)
+        notifyItemInserted(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderRecipeComment {

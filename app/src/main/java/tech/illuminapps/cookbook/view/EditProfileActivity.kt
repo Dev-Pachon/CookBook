@@ -2,6 +2,7 @@ package tech.illuminapps.cookbook.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import tech.illuminapps.cookbook.databinding.ActivityEditProfileBinding
 
@@ -14,6 +15,13 @@ class EditProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        for (x in 1..20) {
+            val chip: Chip = Chip(binding.root.context)
+            chip.text = "Categoría $x"
+            binding.chipGroup.addView(chip)
+            setContentView(binding.root)
+        }
     }
 
     override fun onBackPressed(){

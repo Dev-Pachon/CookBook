@@ -26,6 +26,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="8dp"
+            android:contentDescription="@string/recipe_icon_string"
             app:srcCompat="@drawable/recipe" />
     </androidx.cardview.widget.CardView>
 
@@ -36,7 +37,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:text="TextView"
+        tools:text="Nueva receta"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView4"
@@ -49,7 +50,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
+        tools:text="Este plato es de muy lejos, tiene mucha historia y es perfecto para una cena romantica"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/titleTV"

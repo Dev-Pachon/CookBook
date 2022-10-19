@@ -50,8 +50,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="www.example.com/cookbook"
-                    android:pathPrefix="/recipe"
+                    android:host="www.example.com"
+                    android:pathPrefix="/cookbook/recipe"
                     android:scheme="https" />
             </intent-filter>
 

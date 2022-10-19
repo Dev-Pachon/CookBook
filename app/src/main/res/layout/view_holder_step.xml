@@ -16,11 +16,12 @@
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
+        android:contentDescription="@string/delete_btn_string"
         app:icon="@drawable/delete"
         app:iconSize="20dp"
         app:iconTint="@color/red_700"
         app:layout_constraintBottom_toBottomOf="@+id/addImageBtn"
-        app:layout_constraintEnd_toEndOf="@+id/contentTL"
+        app:layout_constraintEnd_toEndOf="@+id/stepIL"
         app:layout_constraintTop_toTopOf="@+id/addImageBtn" />
 
     <com.google.android.material.button.MaterialButton
@@ -32,6 +33,7 @@
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
+        android:contentDescription="@string/add_image_btn_string"
         app:icon="@drawable/image_add"
         app:iconTint="@android:color/darker_gray"
         app:iconSize="20dp"
@@ -39,11 +41,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/contentTL"
+        android:id="@+id/stepIL"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Nombre de la receta"
+        tools:hint="Paso 1"
+        android:labelFor="@id/editText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +54,7 @@
         app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large">
 
         <EditText
-            android:id="@+id/editTextTextSearchRecipe"
+            android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -68,8 +71,17 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/contentTL"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@id/stepIL"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addImageBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/addImageBtn">
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/recipe_step_img_string"
+            app:srcCompat="@drawable/capture" />
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

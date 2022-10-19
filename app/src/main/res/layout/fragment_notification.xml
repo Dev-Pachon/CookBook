@@ -17,7 +17,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:text="Notificaciones"
+            android:text="@string/notifications_string"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="32dp"
-                    android:text="Hoy"
+                    android:text="@string/today_string"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="32dp"
-                    android:text="Anteriores"
+                    android:text="@string/previous_string"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
                     app:layout_constraintTop_toBottomOf="@id/materialDivider" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/oldNotificationsRV"
+                    android:id="@+id/previousNotificationsRV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"

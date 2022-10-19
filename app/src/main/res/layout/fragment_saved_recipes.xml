@@ -17,7 +17,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:text="Recetas guardadas"
+            android:text="@string/saved_recipes_string"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,13 +25,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/contentTL"
+            android:id="@+id/stepIL"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:hint="Search recipe"
+            android:hint="@string/search_recipe_string"
+            android:labelFor="@id/editText"
             app:layout_constraintBottom_toBottomOf="@+id/backBtn"
             app:layout_constraintEnd_toStartOf="@+id/backBtn"
             app:layout_constraintHorizontal_bias="0.5"
@@ -43,9 +44,10 @@
             app:startIconDrawable="@drawable/search">
 
             <EditText
-                android:id="@+id/editTextTextSearchRecipe"
+                android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -58,12 +60,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:contentDescription="FilterButton"
+            android:contentDescription="@string/filter_btn_string"
             app:icon="@drawable/filter"
             app:iconTint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/contentTL"
+            app:layout_constraintStart_toEndOf="@+id/stepIL"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -73,6 +75,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contentTL" />
+            app:layout_constraintTop_toBottomOf="@+id/stepIL" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

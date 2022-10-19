@@ -19,6 +19,7 @@
             android:id="@+id/imageView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/user_image_string"
             app:srcCompat="@drawable/ic_launcher_foreground" />
     </androidx.cardview.widget.CardView>
 
@@ -27,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        tools:text="Josesito"
         app:layout_constraintEnd_toEndOf="@+id/profileCV"
         app:layout_constraintStart_toStartOf="@+id/profileCV"
         app:layout_constraintTop_toBottomOf="@+id/profileCV" />

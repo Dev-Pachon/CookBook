@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/go_back_string"
         app:icon="@drawable/arrow_left"
         app:iconTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/more_btn_string"
         app:icon="@drawable/more"
         app:iconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +53,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/poppins"
-                android:text="TextView"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +75,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="0dp"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    android:contentDescription="@string/recipe_image_string"
+                    app:srcCompat="@drawable/capture" />
 
             </androidx.cardview.widget.CardView>
 
@@ -85,7 +87,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Ingredientes"
+                android:text="@string/ingredients_string"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/numIngredientsTV"
@@ -99,7 +101,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="@+id/textView6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -123,8 +124,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
-                android:text="Receta"
+                android:text="@string/recipe_string"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ingredientsRV" />
