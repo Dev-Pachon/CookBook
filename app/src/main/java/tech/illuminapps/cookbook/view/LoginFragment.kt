@@ -56,7 +56,6 @@ class LoginFragment : Fragment() {
                 when(it.result){
 
                     AuthResult.SUCCESS->{
-
                         userViewModel.logIn(requireActivity())
                         mainActivity.showFragment(mainFragment)
 

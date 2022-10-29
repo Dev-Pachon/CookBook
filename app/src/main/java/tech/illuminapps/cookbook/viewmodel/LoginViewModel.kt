@@ -25,7 +25,6 @@ class LoginViewModel:ViewModel() {
            val fbUser = Firebase.auth.currentUser
 
 
-
                    _authState.value = AuthState(AuthResult.SUCCESS,"Success")
 
 
