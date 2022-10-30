@@ -34,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.registerBtn.setOnClickListener {
 
             var email = binding.emailTxt.text.toString()
-            var name = binding.emailTxt.text.toString()
+            var name = binding.nameTxt.text.toString()
             var password = binding.passwordTxt.text.toString()
 
             registerViewModel.register(name,email,password)

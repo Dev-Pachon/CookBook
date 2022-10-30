@@ -31,7 +31,7 @@ class RegisterCategoriesActivity : AppCompatActivity() {
         var categories = arrayListOf("Desayuno","Italiana","Pasta","Francesa","Española","Mexicana","Argentina","Comida Rapida","Hamburguesa","Tipica")
         //var categoriesSize = categories.size
 
-        for (categorie in 0..categories.size){
+        for (categorie in 0..categories.size-1){
             val chip = Chip(binding.root.context)
             chip.text = categories.get(categorie)
             binding.chipGroup.addView(chip)
@@ -41,9 +41,11 @@ class RegisterCategoriesActivity : AppCompatActivity() {
 
         binding.finishBtn.setOnClickListener {
 
+            Log.e(">>>","Se presiono el boton")
+
             var selectedCategories = arrayListOf<String>()
 
-            for(position in 0..categories.size){
+            for(position in 0..categories.size-1){
 
 
                 val chip = binding.chipGroup.findViewById<Chip>(position)
@@ -56,6 +58,7 @@ class RegisterCategoriesActivity : AppCompatActivity() {
 
 
             }
+            Log.e(">>>","Va a hacer el llamdo al metodo en el viewModel")
 
             registerCategoriesViewModel.registerCategories(selectedCategories)
 
@@ -67,7 +70,6 @@ class RegisterCategoriesActivity : AppCompatActivity() {
 
                     AuthResult.SUCCESS->{
 
-                        Log.e(">>>","Deberia cambiar de pantalla")
 
                         // startActivity(Intent(binding.root.context, RegisterCategoriesActivity::class.java))
                     }

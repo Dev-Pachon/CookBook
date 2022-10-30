@@ -19,15 +19,16 @@ class RegisterCategoriesViewModel: ViewModel() {
 
     fun registerCategories(categories:ArrayList<String>){
 
-        Log.e(">>>","Entra al metodo")
+        Log.e(">>>","Entra al metodo y el arreglo tiene ${categories.toString()}")
 
         viewModelScope.launch(Dispatchers.IO){
 
-            Firebase.firestore.collection("users").document(Firebase.auth.currentUser?.uid.toString()).update("followedCategories",categories).addOnSuccessListener {
+
+            Firebase.firestore.collection("users").document(Firebase.auth.currentUser?.uid.toString()).update("followedCategories",categories)
 
 
 
-                _authState.value = AuthState(AuthResult.SUCCESS,"Success")
+                _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
 
 
             }
@@ -39,4 +40,3 @@ class RegisterCategoriesViewModel: ViewModel() {
 
 
     }
-}
