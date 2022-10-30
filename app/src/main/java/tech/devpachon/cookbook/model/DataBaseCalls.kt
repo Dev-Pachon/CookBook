@@ -14,18 +14,18 @@ import tech.illuminapps.cookbook.viewmodel.AuthState
 
 class DataBaseCalls {
 
-    private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
-    val authState : LiveData<AuthState> get() = _authState
 
-    fun login(email:String,password:String){
+    fun login(email:String,password:String):Int{
+
+        var toReturn = 0
 
         Firebase.auth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
             Log.e(">>>","Hizo la autorizacion")
 
             val fbUser = Firebase.auth.currentUser
 
+            toReturn = 1
 
-            _authState.value = AuthState(AuthResult.SUCCESS,"Success")
 
 
 
@@ -39,13 +39,17 @@ class DataBaseCalls {
 
 
         }.addOnFailureListener{
-            _authState.value = AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta")
-        }
 
+            toReturn = -1
+        }
+    return toReturn
 
     }
 
-    fun register(name:String,email:String,password:String){
+    fun register(name:String,email:String,password:String):Int{
+
+        var toReturn = 0
+
 
         Firebase.auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener {
 
@@ -64,7 +68,7 @@ class DataBaseCalls {
 
             // Log.e(">>>","Entro al else")
 
-            _authState.value = AuthState(AuthResult.SUCCESS,"Success")
+            toReturn = 1
 
 
 
@@ -72,18 +76,24 @@ class DataBaseCalls {
 
         }.addOnFailureListener{
             Log.e(">>>","Fallo la creacion")
-            _authState.value = AuthState(AuthResult.FAIL,it.toString())
+            toReturn = -1
+
         }
+        return toReturn
     }
 
 
-    fun registerCategories(categories:ArrayList<String>){
+    fun registerCategories(categories:ArrayList<String>):Int{
 
-        Firebase.firestore.collection("users").document(Firebase.auth.currentUser?.uid.toString()).update("followedCategories",categories)
+        var toReturn = 0
+        Firebase.firestore.collection("users").document(Firebase.auth.currentUser?.uid.toString()).update("followedCategories",categories).addOnSuccessListener(){
+            toReturn = 1
+        }.addOnFailureListener(){
+            toReturn = -1
+        }
 
 
-
-        _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
+        return toReturn
 
     }
 

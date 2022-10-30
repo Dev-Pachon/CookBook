@@ -14,16 +14,26 @@ import tech.devpachon.cookbook.model.DataBaseCalls
 
 class LoginViewModel:ViewModel() {
 
-    //private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
-    //val authState : LiveData<AuthState> get() = _authState
+    private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
+    val authState : LiveData<AuthState> get() = _authState
      val db = DataBaseCalls()
 
     fun logIn(email:String,password:String){
 
       viewModelScope.launch(Dispatchers.IO){
 
-        db.login(email,password)
+       var value =  db.login(email,password)
 
+       if(value==1){
+
+           _authState.value = AuthState(AuthResult.SUCCESS,"Success")
+
+       }else{
+
+           _authState.value = AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta")
+
+
+       }
 
 
    }

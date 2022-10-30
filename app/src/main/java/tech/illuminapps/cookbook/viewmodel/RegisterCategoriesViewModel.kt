@@ -15,8 +15,8 @@ import tech.devpachon.cookbook.model.User
 
 class RegisterCategoriesViewModel: ViewModel() {
 
-    //private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
-    //val authState : LiveData<AuthState> get() = _authState
+    private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
+    val authState : LiveData<AuthState> get() = _authState
     val db = DataBaseCalls()
 
     fun registerCategories(categories:ArrayList<String>){
@@ -26,8 +26,17 @@ class RegisterCategoriesViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO){
 
 
-            db.registerCategories(categories)
+           var value = db.registerCategories(categories)
+            if(value==1){
 
+                _authState.value = AuthState(AuthResult.SUCCESS,"Success")
+
+            }else{
+
+                _authState.value = AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta")
+
+
+            }
 
             }
 

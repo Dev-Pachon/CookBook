@@ -40,6 +40,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         mainFragment = MainFragment.newInstance(mainActivity)
 
         binding.loginBtn.setOnClickListener {
@@ -51,7 +52,7 @@ class LoginFragment : Fragment() {
 
             loginViewModel.logIn(email,password);
 
-            loginViewModel.db.authState.observe(viewLifecycleOwner){
+            loginViewModel.authState.observe(viewLifecycleOwner){
 
                 when(it.result){
 

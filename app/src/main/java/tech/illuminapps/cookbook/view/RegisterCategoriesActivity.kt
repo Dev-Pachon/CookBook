@@ -63,7 +63,7 @@ class RegisterCategoriesActivity : AppCompatActivity() {
             registerCategoriesViewModel.registerCategories(selectedCategories)
 
 
-            registerCategoriesViewModel.db.authState.observe(this){
+            registerCategoriesViewModel.authState.observe(this){
 
 
                 when(it.result){
