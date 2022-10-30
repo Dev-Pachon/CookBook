@@ -51,7 +51,7 @@ class LoginFragment : Fragment() {
 
             loginViewModel.logIn(email,password);
 
-            loginViewModel.authState.observe(viewLifecycleOwner){
+            loginViewModel.db.authState.observe(viewLifecycleOwner){
 
                 when(it.result){
 

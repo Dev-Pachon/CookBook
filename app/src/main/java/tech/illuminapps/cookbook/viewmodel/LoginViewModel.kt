@@ -10,37 +10,20 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import tech.devpachon.cookbook.model.DataBaseCalls
 
 class LoginViewModel:ViewModel() {
 
-    private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
-    val authState : LiveData<AuthState> get() = _authState
+    //private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
+    //val authState : LiveData<AuthState> get() = _authState
+     val db = DataBaseCalls()
 
     fun logIn(email:String,password:String){
 
-   viewModelScope.launch(Dispatchers.IO){
-       Firebase.auth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
-           Log.e(">>>","Hizo la autorizacion")
+      viewModelScope.launch(Dispatchers.IO){
 
-           val fbUser = Firebase.auth.currentUser
+        db.login(email,password)
 
-
-                   _authState.value = AuthState(AuthResult.SUCCESS,"Success")
-
-
-
-
-              // Log.e(">>>","Entro al else")
-
-
-
-
-
-
-
-       }.addOnFailureListener{
-           _authState.value = AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta")
-       }
 
 
    }
@@ -48,8 +31,5 @@ class LoginViewModel:ViewModel() {
 
 
     }
-
-
-
 
 }
