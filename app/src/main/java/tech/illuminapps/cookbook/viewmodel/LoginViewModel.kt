@@ -1,16 +1,12 @@
 package tech.illuminapps.cookbook.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import tech.devpachon.cookbook.model.DataBaseCalls
+import tech.illuminapps.cookbook.model.DataBaseCalls
 
 class LoginViewModel:ViewModel() {
 
@@ -26,11 +22,11 @@ class LoginViewModel:ViewModel() {
 
        if(value==1){
 
-           _authState.value = AuthState(AuthResult.SUCCESS,"Success")
+           _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
 
        }else{
 
-           _authState.value = AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta")
+           _authState.postValue(AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta"))
 
 
        }

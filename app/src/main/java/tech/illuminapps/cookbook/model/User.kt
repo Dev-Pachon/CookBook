@@ -1,4 +1,4 @@
-package tech.devpachon.cookbook.model
+package tech.illuminapps.cookbook.model
 
 data class User(
    var id:String = "",
