@@ -72,6 +72,8 @@ class RegisterCategoriesActivity : AppCompatActivity() {
 
 
                         // startActivity(Intent(binding.root.context, RegisterCategoriesActivity::class.java))
+                        startActivity(Intent(binding.root.context, MainActivity::class.java))
+
                     }
                     AuthResult.IDLE->{
 
