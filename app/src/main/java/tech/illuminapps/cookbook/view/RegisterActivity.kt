@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
             var password = binding.passwordTxt.text.toString()
 
             registerViewModel.register(name,email,password)
-            registerViewModel.authState.observe(this){
+            registerViewModel.db.authState.observe(this){
 
 
                 when(it.result){

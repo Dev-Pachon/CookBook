@@ -11,8 +11,8 @@ import tech.illuminapps.cookbook.model.DataBaseCalls
 
 class RegisterViewModel:ViewModel() {
 
-    private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
-    val authState : LiveData<AuthState> get() = _authState
+   // private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
+    //val authState : LiveData<AuthState> get() = _authState
 
     val db = DataBaseCalls()
 
@@ -22,8 +22,8 @@ class RegisterViewModel:ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO){
 
-           var value =  db.register(name,email,password)
-
+           db.register(name,email,password)
+/*
             if(value==1){
 
                 _authState.value = AuthState(AuthResult.SUCCESS,"Success")
@@ -34,6 +34,8 @@ class RegisterViewModel:ViewModel() {
 
 
             }
+
+ */
 
         }
 

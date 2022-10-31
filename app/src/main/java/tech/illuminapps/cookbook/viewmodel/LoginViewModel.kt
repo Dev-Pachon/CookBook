@@ -10,26 +10,26 @@ import tech.illuminapps.cookbook.model.DataBaseCalls
 
 class LoginViewModel:ViewModel() {
 
-    private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
-    val authState : LiveData<AuthState> get() = _authState
+    //private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
+    //val authState : LiveData<AuthState> get() = _authState
      val db = DataBaseCalls()
 
     fun logIn(email:String,password:String){
 
       viewModelScope.launch(Dispatchers.IO){
 
-       var value =  db.login(email,password)
+       db.login(email,password)
 
-       if(value==1){
+       //if(value==1){
 
-           _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
+           //authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
 
-       }else{
+       //}else{
 
-           _authState.postValue(AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta"))
+          //_authState.postValue(AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta"))
 
 
-       }
+       //}
 
 
    }
