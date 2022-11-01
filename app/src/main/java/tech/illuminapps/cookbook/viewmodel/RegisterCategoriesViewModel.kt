@@ -10,7 +10,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import tech.illuminapps.cookbook.model.DataBaseCalls
 
 class RegisterCategoriesViewModel: ViewModel() {
 
@@ -28,7 +27,7 @@ class RegisterCategoriesViewModel: ViewModel() {
                 _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
 
             }.addOnFailureListener(){
-                _authState.postValue(AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta"))
+                _authState.postValue(AuthState(AuthResult.FAIL,it.localizedMessage.toString()))
 
             }
 

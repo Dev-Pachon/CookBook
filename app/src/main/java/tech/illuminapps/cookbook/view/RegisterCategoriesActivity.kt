@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import com.google.android.material.chip.Chip
@@ -83,7 +84,7 @@ class RegisterCategoriesActivity : AppCompatActivity() {
                     }
                     AuthResult.FAIL->{
 
-                        //Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
+                        Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
 
 
                     }

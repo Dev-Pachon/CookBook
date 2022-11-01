@@ -1,5 +1,6 @@
 package tech.illuminapps.cookbook.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -69,7 +70,7 @@ class LoginFragment : Fragment() {
                     }
                     AuthResult.FAIL->{
 
-                        //Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
+                        Toast.makeText(mainActivity,it.message,Toast.LENGTH_LONG).show()
 
 
                     }

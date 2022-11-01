@@ -10,7 +10,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import tech.illuminapps.cookbook.model.DataBaseCalls
 import tech.illuminapps.cookbook.model.User
 
 class RegisterViewModel:ViewModel() {
@@ -49,8 +48,7 @@ class RegisterViewModel:ViewModel() {
 
 
             }.addOnFailureListener{
-                Log.e(">>>","Fallo la creacion")
-                _authState.postValue(AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta"))
+                _authState.postValue(AuthState(AuthResult.FAIL,it.localizedMessage.toString()))
 
             }
           // db.register(name,email,password)

@@ -57,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                     AuthResult.FAIL->{
 
-                        //Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
+                        Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
 
 
                     }

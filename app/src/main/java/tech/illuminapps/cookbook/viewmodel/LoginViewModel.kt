@@ -9,7 +9,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import tech.illuminapps.cookbook.model.DataBaseCalls
 
 class LoginViewModel:ViewModel() {
 
@@ -40,7 +39,7 @@ class LoginViewModel:ViewModel() {
 
 
           }.addOnFailureListener{
-              _authState.postValue(AuthState(AuthResult.FAIL,"Correo y/o Contraseña Incorrecta"))
+              _authState.postValue(AuthState(AuthResult.FAIL,"Correo y/o Contraseña erroneos"))
 
           }
 
