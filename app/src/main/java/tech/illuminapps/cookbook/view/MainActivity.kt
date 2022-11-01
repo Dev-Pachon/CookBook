@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityMainBinding
 import tech.illuminapps.cookbook.viewmodel.AuthResult
@@ -50,7 +52,15 @@ class MainActivity : AppCompatActivity() {
                                 showFragment(firstInitFragment)
                             }
                             FirstInit.NORMAL_INIT -> {
-                                showFragment(loginFragment)
+
+                                if(Firebase.auth.currentUser==null){
+                                    showFragment(loginFragment)
+                                }else{
+                                    showFragment(mainFragment)
+                                }
+
+
+
                             }
                             else -> {
                                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
