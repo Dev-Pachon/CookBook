@@ -3,6 +3,7 @@ package tech.illuminapps.cookbook.viewmodel
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import tech.illuminapps.cookbook.databinding.ViewHolderIngredientBinding
 import tech.illuminapps.cookbook.databinding.ViewHolderRecipeExpandedBinding
@@ -32,11 +33,18 @@ class IngredientAdapter : RecyclerView.Adapter<ViewHolderIngredient>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolderIngredient, position: Int) {
-        binding.nameTV.text = ingredients[position].name
+        binding.nameTV.text = ingredients[position].nombre
         binding.quantityTV.text = ingredients[position].quantity.toString()
+        binding.ingredientView.isGone = true
+      //  binding.ingredientCV.isGone = true
     }
 
     override fun getItemCount(): Int {
         return ingredients.size
     }
+
+    fun returnIngredients(): ArrayList<Ingredient>{
+        return ingredients
+    }
+
 }

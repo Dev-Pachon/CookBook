@@ -38,4 +38,7 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>() {
     override fun getItemCount(): Int {
         return steps.size
     }
+    fun getSteps():ArrayList<Step>{
+        return steps
+    }
 }

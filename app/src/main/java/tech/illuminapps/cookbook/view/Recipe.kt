@@ -12,8 +12,10 @@ class Recipe(
 }
 
 data class Ingredient(
-    var name: String,
-    var quantity: Int
+    var id:String,
+    var nombre: String,
+    var quantity: Int,
+    var imagen:String
 )
 
 data class Step(

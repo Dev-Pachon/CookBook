@@ -12,7 +12,7 @@
         android:background="#D72323">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ingredientView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -76,7 +76,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/ingredientView" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextBtn"
