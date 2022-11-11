@@ -86,8 +86,11 @@ class CreateRecipeActivity : AppCompatActivity() {
         }
         binding.finishBtn.setOnClickListener{
 
+            var name = binding.editTextRecipeName.text.toString()
+            createRecipeViewModel.addPost(adapterIngredient.returnIngredients(),adapterStep.getSteps(),name)
 
-            
+
+
         }
 
     }
