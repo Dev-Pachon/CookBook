@@ -43,18 +43,23 @@ class CreateRecipeActivity : AppCompatActivity() {
         }
 
         binding.showAddIngredientGroup.setOnClickListener {
-            binding.ingredientsAddGroup.isGone = !binding.ingredientsAddGroup.isGone
-            val items = arrayOf("Item 1", "Item 2", "Item 3", "Item 4")
-            (binding.menu.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(items)
+
+                binding.ingredientsAddGroup.isGone = !binding.ingredientsAddGroup.isGone
+                val items = arrayOf("Queso", "Jamon", "Carne de Cerdo", "Carne de Res","Aceite de soja"
+                ,"Yogur","Mantequilla","Lentejas","Setas","Papa","Berenjena","Brocoli","Calabacin"
+                ,"Cebolla","Tomate")
+                (binding.menu.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(items)
+
+
         }
 
         binding.addIngredientBtn.setOnClickListener {
             val ingredient = Ingredient(binding.ingredientsDrodownMenu.text.toString(),Integer.parseInt(binding.quantityIL.editText?.text.toString()))
             adapterIngredient.addIngredient(ingredient)
-            Toast.makeText(binding.root.context,"äs;lkda;sd",Toast.LENGTH_LONG).show()
-            binding.ingredientsAddGroup.isGone = !binding.ingredientsAddGroup.isGone
-            binding.ingredientsDrodownMenu.text.clear()
-            binding.quantityIL.editText?.text?.clear()
+           // Toast.makeText(binding.root.context,"äs;lkda;sd",Toast.LENGTH_LONG).show()
+           // binding.ingredientsAddGroup.isGone = !binding.ingredientsAddGroup.isGone
+           // binding.ingredientsDrodownMenu.text.clear()
+           // binding.quantityIL.editText?.text?.clear()
         }
 
         binding.addStepBtn.setOnClickListener {
