@@ -1,18 +1,24 @@
 package tech.illuminapps.cookbook.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import tech.illuminapps.cookbook.databinding.ActivityCreateRecipeBinding
 import tech.illuminapps.cookbook.viewmodel.CreateRecipeViewModel
 import tech.illuminapps.cookbook.viewmodel.IngredientAdapter
 import tech.illuminapps.cookbook.viewmodel.StepAdapter
+import java.util.*
 
 class CreateRecipeActivity : AppCompatActivity() {
 
@@ -42,6 +48,12 @@ class CreateRecipeActivity : AppCompatActivity() {
         binding.ingredientsRV.adapter = adapterIngredient
         binding.recipeStepsRV.adapter = adapterStep
 
+        val galLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+            ,::onGalleryResult
+
+        )
+
         binding.backBtn.setOnClickListener {
             onBackPressed()
         }
@@ -58,7 +70,7 @@ class CreateRecipeActivity : AppCompatActivity() {
         }
 
         binding.addIngredientBtn.setOnClickListener {
-            val ingredient = Ingredient("1",binding.ingredientsDrodownMenu.text.toString(),Integer.parseInt(binding.quantityIL.editText?.text.toString()),"")
+            val ingredient = Ingredient("1",binding.ingredientsDrodownMenu.text.toString(),Integer.parseInt(binding.quantityIL.editText?.text.toString()))
             adapterIngredient.addIngredient(ingredient)
            // Toast.makeText(binding.root.context,"äs;lkda;sd",Toast.LENGTH_LONG).show()
            // binding.ingredientsAddGroup.isGone = !binding.ingredientsAddGroup.isGone
@@ -67,7 +79,11 @@ class CreateRecipeActivity : AppCompatActivity() {
         }
 
         binding.addStepBtn.setOnClickListener {
-            val step = Step(stepCounter, null, "")
+
+           // var uid2 = UUID.randomUUID().toString()
+
+
+            val step = Step(stepCounter, null, binding.stepIL.toString(),stepCounter.toString())
             adapterStep.addStep(step)
             stepCounter++
         }
@@ -87,11 +103,27 @@ class CreateRecipeActivity : AppCompatActivity() {
         binding.finishBtn.setOnClickListener{
 
             var name = binding.editTextRecipeName.text.toString()
-            createRecipeViewModel.addPost(adapterIngredient.returnIngredients(),adapterStep.getSteps(),name)
+            var selectedCategories = arrayListOf<String>()
+            for(position in 0..categories.size-1){
 
+
+                val chip = binding.chipGroup.findViewById<Chip>(position)
+                if(chip.isChecked){
+
+                    selectedCategories.add(chip.text.toString())
+
+
+                }
+
+
+            }
+
+            createRecipeViewModel.addPost(adapterIngredient.returnIngredients(),adapterStep.getSteps(),name,selectedCategories)
+            startActivity(Intent(binding.root.context, MainActivity::class.java))
 
 
         }
+
 
     }
 
@@ -105,5 +137,19 @@ class CreateRecipeActivity : AppCompatActivity() {
                 super.onBackPressed()
             }
             .show()
+    }
+    private fun onGalleryResult(activityResult: ActivityResult) {
+
+        if(activityResult.resultCode == RESULT_OK){
+
+            /*
+            val uri = activityResult.data?.data
+            uri?.let {
+                Firebase.storage.reference.child("profiles").child(UUID.randomUUID().toString()).putFile(uri)
+
+            }
+            */
+
+        }
     }
 }

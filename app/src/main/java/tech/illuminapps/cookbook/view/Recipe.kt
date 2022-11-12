@@ -15,11 +15,12 @@ data class Ingredient(
     var id:String,
     var nombre: String,
     var quantity: Int,
-    var imagen:String
+    //var imagen:String
 )
 
 data class Step(
     var position:Int,
     var image: String?,
-    var content:String
+    var content:String,
+    var id:String
 )

@@ -27,11 +27,13 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>() {
 
         binding = ViewHolderStepBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
+
         return ViewHolderStep(binding.root)
     }
 
     override fun onBindViewHolder(holder: ViewHolderStep, position: Int) {
         val stepPos = steps[position].position
+       // binding.step = step
         binding.stepIL.hint = "Paso ${stepPos}"
     }
 
