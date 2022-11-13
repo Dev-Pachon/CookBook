@@ -50,7 +50,8 @@ class CreateRecipeViewModel: ViewModel() {
 
            var uid2 = UUID.randomUUID().toString()
             var stepToAdd = steps.get(step)
-            Firebase.firestore.collection("posts").document(uid).collection("steps").document(uid2).set(step)
+           // Log.e(">>>",stepToAdd.toString())
+            Firebase.firestore.collection("posts").document(uid).collection("steps").document(uid2).set(stepToAdd)
 
 
         }

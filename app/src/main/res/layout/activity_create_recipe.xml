@@ -171,14 +171,14 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/recipe_name_string"
-                android:labelFor="@+id/editTextRecipeName"
+                android:labelFor="@+id/editText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large">
 
                 <EditText
-                    android:id="@+id/editTextRecipeName"
+                    android:id="@+id/editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />

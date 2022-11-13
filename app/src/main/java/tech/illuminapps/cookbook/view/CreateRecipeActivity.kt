@@ -102,7 +102,7 @@ class CreateRecipeActivity : AppCompatActivity() {
         }
         binding.finishBtn.setOnClickListener{
 
-            var name = binding.editTextRecipeName.text.toString()
+            var name = binding.editText.text.toString()
             var selectedCategories = arrayListOf<String>()
             for(position in 0..categories.size-1){
 
