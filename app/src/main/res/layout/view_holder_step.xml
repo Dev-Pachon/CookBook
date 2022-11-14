@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_holder_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="32dp"
@@ -45,18 +46,22 @@
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:hint="Paso 1"
         android:labelFor="@id/editText"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/done"
+        app:endIconMode="custom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardViewStep"
-        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large">
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large"
+        tools:hint="Paso 1">
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:textSize="14sp"
             tools:ignore="SpeakableTextPresentCheck" />
 

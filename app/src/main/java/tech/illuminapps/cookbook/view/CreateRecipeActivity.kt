@@ -3,6 +3,7 @@ package tech.illuminapps.cookbook.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -70,12 +71,20 @@ class CreateRecipeActivity : AppCompatActivity() {
         }
 
         binding.addIngredientBtn.setOnClickListener {
-            val ingredient = Ingredient("1",binding.ingredientsDrodownMenu.text.toString(),Integer.parseInt(binding.quantityIL.editText?.text.toString()))
-            adapterIngredient.addIngredient(ingredient)
-           // Toast.makeText(binding.root.context,"äs;lkda;sd",Toast.LENGTH_LONG).show()
-           // binding.ingredientsAddGroup.isGone = !binding.ingredientsAddGroup.isGone
-           // binding.ingredientsDrodownMenu.text.clear()
-           // binding.quantityIL.editText?.text?.clear()
+
+            if(binding.quantityIL.editText?.text!!.isNotEmpty() && binding.quantityIL.editText!!.text.isNotEmpty()) {
+
+                val ingredient = Ingredient(
+                    "1",
+                    binding.ingredientsDrodownMenu.text.toString(),
+                    Integer.parseInt(binding.quantityIL.editText?.text.toString())
+                )
+                adapterIngredient.addIngredient(ingredient)
+                // Toast.makeText(binding.root.context,"äs;lkda;sd",Toast.LENGTH_LONG).show()
+                // binding.ingredientsAddGroup.isGone = !binding.ingredientsAddGroup.isGone
+                // binding.ingredientsDrodownMenu.text.clear()
+                // binding.quantityIL.editText?.text?.clear()
+            }
         }
 
         binding.addStepBtn.setOnClickListener {
@@ -83,9 +92,8 @@ class CreateRecipeActivity : AppCompatActivity() {
            // var uid2 = UUID.randomUUID().toString()
 
 
-            val step = Step(stepCounter, null, binding.stepIL.toString(),stepCounter.toString())
+            val step = Step(stepCounter, null, binding.stepIL.editText.toString(),stepCounter.toString())
             adapterStep.addStep(step)
-            stepCounter++
         }
         var categories = arrayListOf("Desayuno","Italiana","Pasta","Francesa","Española","Mexicana","Argentina","Comida Rapida","Hamburguesa","Tipica")
 

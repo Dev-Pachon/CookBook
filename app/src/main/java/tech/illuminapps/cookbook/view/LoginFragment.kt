@@ -49,9 +49,10 @@ class LoginFragment : Fragment() {
             val email = binding.emailText.text.toString()
             val password = binding.editText.text.toString()
 
-            Log.e(">>>>>", " Email: ${email} y contrasena ${password}" )
+            Log.e(">>>>>", " Email: ${email} y contrasena ${password}")
 
-            loginViewModel.logIn(email,password);
+            if(email.isNotEmpty() && password.isNotEmpty())
+                loginViewModel.logIn(email,password);
 
             loginViewModel.authState.observe(viewLifecycleOwner){
 
