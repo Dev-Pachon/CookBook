@@ -1,6 +1,7 @@
 package tech.illuminapps.cookbook.view
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -33,7 +34,7 @@ class CreateRecipeActivity : AppCompatActivity() {
     private lateinit var adapterStep:StepAdapter
     private var stepCounter = 1
     private val createRecipeViewModel : CreateRecipeViewModel by viewModels()
-
+    private lateinit var mainImageUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,9 +126,21 @@ class CreateRecipeActivity : AppCompatActivity() {
 
 
             }
+            if(this::mainImageUri.isInitialized){
+                createRecipeViewModel.addPost(adapterIngredient.returnIngredients(),adapterStep.getSteps(),name,selectedCategories,mainImageUri)
+                startActivity(Intent(binding.root.context, MainActivity::class.java))
+            }else{
+                Toast.makeText(this,"Añada una Imagen del resultado final de la receta",Toast.LENGTH_LONG)
+            }
 
-            createRecipeViewModel.addPost(adapterIngredient.returnIngredients(),adapterStep.getSteps(),name,selectedCategories)
-            startActivity(Intent(binding.root.context, MainActivity::class.java))
+
+
+        }
+        binding.cardView3.setOnClickListener{
+
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            galLauncher.launch(intent)
 
 
         }
@@ -149,9 +162,19 @@ class CreateRecipeActivity : AppCompatActivity() {
     private fun onGalleryResult(activityResult: ActivityResult) {
 
         if(activityResult.resultCode == RESULT_OK){
+            val uri = activityResult.data?.data
+            mainImageUri = uri!!
+            //val name = activityResult.data.data.
+            uri?.let {
+                binding.imageView10.setImageURI(uri)
+                mainImageUri = uri
+            }
+
+
+
 
             /*
-            val uri = activityResult.data?.data
+
             uri?.let {
                 Firebase.storage.reference.child("profiles").child(UUID.randomUUID().toString()).putFile(uri)
 

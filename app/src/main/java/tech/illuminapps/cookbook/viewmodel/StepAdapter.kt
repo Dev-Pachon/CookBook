@@ -14,6 +14,10 @@ import tech.illuminapps.cookbook.view.Comment
 import tech.illuminapps.cookbook.view.Step
 import tech.illuminapps.cookbook.view.ViewHolderRecipeComment
 import tech.illuminapps.cookbook.view.ViewHolderStep
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import tech.illuminapps.cookbook.model.GalleryGetter
+
 
 class StepAdapter : RecyclerView.Adapter<ViewHolderStep>() {
 
@@ -70,6 +74,15 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>() {
         }
 
         binding.addImageBtn.setOnClickListener {
+
+            val galery = GalleryGetter()
+            galery.getImage(holder)
+
+
+        }
+        binding.deleteBtn.setOnClickListener {
+
+            steps.remove(steps.get(position))
 
         }
     }
