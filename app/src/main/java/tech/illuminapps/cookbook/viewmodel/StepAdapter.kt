@@ -86,6 +86,7 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>(),onUriReady{
         binding.addImageBtn.setOnClickListener {
 
             lastStepModified = position
+            currentBinding = binding
             /*
             val galLauncher = registerForActivityResult(
                 ActivityResultContracts.StartActivityForResult()
