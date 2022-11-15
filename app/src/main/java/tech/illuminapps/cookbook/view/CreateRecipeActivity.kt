@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.isGone
@@ -20,9 +21,10 @@ import tech.illuminapps.cookbook.databinding.ActivityCreateRecipeBinding
 import tech.illuminapps.cookbook.viewmodel.CreateRecipeViewModel
 import tech.illuminapps.cookbook.viewmodel.IngredientAdapter
 import tech.illuminapps.cookbook.viewmodel.StepAdapter
+import tech.illuminapps.cookbook.viewmodel.onGalleryCalled
 import java.util.*
 
-class CreateRecipeActivity : AppCompatActivity() {
+class CreateRecipeActivity : AppCompatActivity(), onGalleryCalled {
 
     val binding: ActivityCreateRecipeBinding by lazy {
         ActivityCreateRecipeBinding.inflate(layoutInflater)
@@ -35,6 +37,9 @@ class CreateRecipeActivity : AppCompatActivity() {
     private var stepCounter = 1
     private val createRecipeViewModel : CreateRecipeViewModel by viewModels()
     private lateinit var mainImageUri: Uri
+    private var stepUri:String = ""
+    private lateinit var galLauncher2: ActivityResultLauncher<Intent>
+    private var listener: onUriReady?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +54,17 @@ class CreateRecipeActivity : AppCompatActivity() {
         binding.recipeStepsRV.layoutManager = layoutMSteps
         binding.ingredientsRV.adapter = adapterIngredient
         binding.recipeStepsRV.adapter = adapterStep
+        adapterStep.listener = this
+        listener = adapterStep
 
         val galLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
             ,::onGalleryResult
 
+        )
+        galLauncher2 = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+            ,::onGalleryResultStep
         )
 
         binding.backBtn.setOnClickListener {
@@ -92,9 +103,9 @@ class CreateRecipeActivity : AppCompatActivity() {
 
            // var uid2 = UUID.randomUUID().toString()
 
-
             val step = Step(stepCounter, null, binding.stepIL.editText.toString(),stepCounter.toString())
             adapterStep.addStep(step)
+            stepCounter++
         }
         var categories = arrayListOf("Desayuno","Italiana","Pasta","Francesa","Española","Mexicana","Argentina","Comida Rapida","Hamburguesa","Tipica")
 
@@ -166,6 +177,7 @@ class CreateRecipeActivity : AppCompatActivity() {
             mainImageUri = uri!!
             //val name = activityResult.data.data.
             uri?.let {
+                Log.e(">>>", it.toString() )
                 binding.imageView10.setImageURI(uri)
                 mainImageUri = uri
             }
@@ -183,4 +195,46 @@ class CreateRecipeActivity : AppCompatActivity() {
 
         }
     }
+    private fun onGalleryResultStep(activityResult: ActivityResult) {
+
+        if(activityResult.resultCode == RESULT_OK){
+            val uri = activityResult.data?.data
+            uri.let {
+                stepUri = it.toString()
+                Log.e(">>>",stepUri)
+                listener?.uriReady(stepUri)
+            }
+            //val name = activityResult.data.data.
+
+
+
+
+
+            /*
+
+            uri?.let {
+                Firebase.storage.reference.child("profiles").child(UUID.randomUUID().toString()).putFile(uri)
+
+            }
+            */
+
+        }
+    }
+    override fun openGallery() {
+
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        galLauncher2.launch(intent)
+
+
+
+    }
+
+
+
+
+}
+interface onUriReady{
+
+    fun uriReady(uri:String)
 }

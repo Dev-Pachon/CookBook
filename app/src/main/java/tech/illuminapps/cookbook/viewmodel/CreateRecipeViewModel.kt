@@ -60,7 +60,18 @@ class CreateRecipeViewModel: ViewModel() {
             var stepToAdd = steps.get(step)
             stepToAdd.id = uid2
            // Log.e(">>>",stepToAdd.toString())
+            if(stepToAdd.image==null){
+
+            }else{
+                var file:File = File(stepToAdd.image)
+                var uri = Uri.parse(stepToAdd.image)
+                stepToAdd.image = file.name
+                Firebase.storage.reference.child("posts").child(uid).child(file.name).putFile(uri)
+            }
+
             Firebase.firestore.collection("posts").document(uid).collection("steps").document(uid2).set(stepToAdd)
+
+
 
 
         }
