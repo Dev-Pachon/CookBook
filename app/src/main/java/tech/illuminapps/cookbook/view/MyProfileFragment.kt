@@ -57,12 +57,14 @@ class MyProfileFragment : Fragment() {
 
 
         binding.myRecipesRV.adapter = adapter
-
+        /*
         for (i in 1..5){
-            val recipe = Recipe("img1.jps", ContextCompat.getDrawable(binding.root.context, R.drawable.cartoon_gc6b1d9dec_1280_1),null,null,true)
+            val recipe = Recipe("img1.jps","imagen ", null,null,null,true)
 
             adapter.addRecipe(recipe)
         }
+
+         */
 
         // Inflate the layout for this fragment
         return binding.root
