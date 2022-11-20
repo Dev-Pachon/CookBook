@@ -23,20 +23,24 @@ class HomeFragmentViewModel: ViewModel()  {
 
     private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
     val authState : LiveData<AuthState> get() = _authState
-    var recipes: ArrayList<Recipe> = arrayListOf()
+
+    private val _recipes = MutableLiveData(ArrayList<Recipe>())
+    val recipes: LiveData<ArrayList<Recipe>> get() = _recipes
+
+   // var recipes: ArrayList<Recipe> = arrayListOf()
 
     fun getFollowedCategoriesPost(){
 
+        var recipes2: ArrayList<Recipe> = arrayListOf()
         viewModelScope.launch(Dispatchers.IO) {
 
             val result  =  Firebase.firestore.collection("users")
                 .document(Firebase.auth.currentUser!!.uid).get().await()
 
             val currentUser = result.toObject(tech.illuminapps.cookbook.model.User::class.java)
-            Log.e(">>>",currentUser.toString())
+            //Log.e(">>>",currentUser.toString())
 
             var posts: ArrayList<Post> = arrayListOf()
-            //var recipes: ArrayList<Recipe> = arrayListOf()
 
             for(categorie in 0..currentUser!!.followedCategories.size-1){
 
@@ -56,7 +60,7 @@ class HomeFragmentViewModel: ViewModel()  {
                         for(doc2 in result3.documents){
 
                             val step = doc2.toObject(Step::class.java)
-                        //    Log.e(">>>",step.toString())
+                        //  Log.e(">>>",step.toString())
                             if (step != null) {
                                 steps.add(step)
                             }
@@ -68,25 +72,31 @@ class HomeFragmentViewModel: ViewModel()  {
                         for(doc3 in result4.documents){
 
                             val ingredient = doc3.toObject(Ingredient::class.java)
-                          //  Log.e(">>>",ingredient.toString())
+                          // Log.e(">>>",ingredient.toString())
                             if (ingredient != null) {
                                 ingredients.add(ingredient)
                             }
 
                         }
                         var recipe = Recipe(post.name,post.mainImage,ingredients,steps,false)
-                        recipes.add(recipe)
+                        //Log.e(">>>",recipe.toString())
+                        recipes2.add(recipe)
+
 
 
                     }
 
 
-
                 }
 
+
             }
-            Log.e(">>>",recipes.toString())
-            _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
+
+           // Log.e(">>>",recipes.toString())
+          //  recipes = recipes2
+            _recipes.postValue(recipes2)
+           // Log.e(">>>",recipes2.toString())
+           // _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
 
 
         }

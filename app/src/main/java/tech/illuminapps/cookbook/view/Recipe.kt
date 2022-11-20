@@ -2,7 +2,7 @@ package tech.illuminapps.cookbook.view
 
 import android.graphics.drawable.Drawable
 
-class Recipe(
+data class Recipe(
     var title:String="",
     var image:String="",
     var ingredients: ArrayList<Ingredient>? = arrayListOf(),

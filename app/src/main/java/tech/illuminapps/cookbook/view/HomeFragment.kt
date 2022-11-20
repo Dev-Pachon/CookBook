@@ -1,6 +1,7 @@
 package tech.illuminapps.cookbook.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -62,14 +63,25 @@ class HomeFragment : Fragment() {
         binding.feedRV.adapter = adapterExtendedRecipe
 
         homeFragmentViewModel.getFollowedCategoriesPost()
+        homeFragmentViewModel.recipes.observe(viewLifecycleOwner){
 
-        /*
+            Log.e(">>>",it.toString())
+
+            for(i in 0..it.size-1){
+
+                adapterExtendedRecipe.addRecipe(it.get(i))
+
+            }
+
+        }
+
         for (i in 1..10){
-            val recipe = Recipe("img1.jps", ContextCompat.getDrawable(binding.root.context, R.drawable.cartoon_gc6b1d9dec_1280_1),null, null)
+            val recipe = Recipe("img1.jps", "",null, null)
             adapterExtendedRecipe.addRecipe(recipe)
         }
 
-         */
+
+
 
         for (i in 1..5){
             val profile = PopularProfile("$i","Name$i" ,"image$i")
