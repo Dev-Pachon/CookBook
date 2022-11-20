@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import tech.illuminapps.cookbook.R
@@ -26,6 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var layoutMPopularProfiles : LinearLayoutManager
 
     private lateinit var adapterExtendedRecipe :ExtendedRecipeAdapter
+    private lateinit var adapterPopularRecipes: ExtendedRecipeAdapter
     private lateinit var adapterPopularProfile: PopularProfileAdapter
     private lateinit var homeFragmentViewModel: HomeFragmentViewModel
 
@@ -57,28 +59,46 @@ class HomeFragment : Fragment() {
         adapterExtendedRecipe = ExtendedRecipeAdapter()
         adapterPopularProfile = PopularProfileAdapter()
         homeFragmentViewModel = HomeFragmentViewModel()
+        adapterPopularRecipes = ExtendedRecipeAdapter()
 
-        binding.tendencesRV.adapter = adapterExtendedRecipe
+        binding.tendencesRV.adapter = adapterPopularRecipes
         binding.popularProfilesRV.adapter = adapterPopularProfile
         binding.feedRV.adapter = adapterExtendedRecipe
 
         homeFragmentViewModel.getFollowedCategoriesPost()
         homeFragmentViewModel.recipes.observe(viewLifecycleOwner){
 
+
+
+                adapterExtendedRecipe.addRecipe(it)
+
             Log.e(">>>",it.toString())
 
-            for(i in 0..it.size-1){
+/*
+        for (i in 0..it.size - 1) {
 
-                adapterExtendedRecipe.addRecipe(it.get(i))
+            var recipe2 = it[i] as Recipe
 
-            }
+            //Log.e(">>>",it.get(i).toString())
+           // Toast.makeText(this,it.get(i).toString(),LONGT)
+
+          //  Toast.makeText(mainActivity,it.get(i).toString(),Toast.LENGTH_LONG).show()
+
 
         }
 
-        for (i in 1..10){
-            val recipe = Recipe("img1.jps", "",null, null)
-            adapterExtendedRecipe.addRecipe(recipe)
+ */
+        //Log.e(">>>", it.size.toString())
+
+
+
+              val recipe = Recipe("img1.jps", "",null, null)
+               adapterPopularRecipes.addRecipe(recipe)
+
+
         }
+
+
 
 
 
@@ -89,6 +109,7 @@ class HomeFragment : Fragment() {
         }
 
         // Inflate the layout for this fragment
+
         return binding.root
     }
 

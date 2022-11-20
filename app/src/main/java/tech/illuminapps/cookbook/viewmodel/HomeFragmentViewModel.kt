@@ -24,21 +24,21 @@ class HomeFragmentViewModel: ViewModel()  {
     private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
     val authState : LiveData<AuthState> get() = _authState
 
-    private val _recipes = MutableLiveData(ArrayList<Recipe>())
-    val recipes: LiveData<ArrayList<Recipe>> get() = _recipes
+    private val _recipes = MutableLiveData(Recipe())
+    val recipes: LiveData<Recipe> get() = _recipes
 
    // var recipes: ArrayList<Recipe> = arrayListOf()
 
     fun getFollowedCategoriesPost(){
 
-        var recipes2: ArrayList<Recipe> = arrayListOf()
+       // var recipes2: ArrayList<Recipe> = arrayListOf()
         viewModelScope.launch(Dispatchers.IO) {
 
             val result  =  Firebase.firestore.collection("users")
                 .document(Firebase.auth.currentUser!!.uid).get().await()
 
             val currentUser = result.toObject(tech.illuminapps.cookbook.model.User::class.java)
-            //Log.e(">>>",currentUser.toString())
+           //Log.e(">>>",currentUser.toString())
 
             var posts: ArrayList<Post> = arrayListOf()
 
@@ -48,7 +48,7 @@ class HomeFragmentViewModel: ViewModel()  {
 
                 for(doc in result2.documents){
                     val post = doc.toObject(Post::class.java)
-                   // Log.e(">>>",post.toString())
+                    //Log.e(">>>",post.toString())
 
                     if(posts.contains(post)){
 
@@ -80,7 +80,8 @@ class HomeFragmentViewModel: ViewModel()  {
                         }
                         var recipe = Recipe(post.name,post.mainImage,ingredients,steps,false)
                         //Log.e(">>>",recipe.toString())
-                        recipes2.add(recipe)
+                       // recipes2.add(recipe)
+                        _recipes.postValue(recipe)
 
 
 
@@ -94,9 +95,9 @@ class HomeFragmentViewModel: ViewModel()  {
 
            // Log.e(">>>",recipes.toString())
           //  recipes = recipes2
-            _recipes.postValue(recipes2)
+
            // Log.e(">>>",recipes2.toString())
-           // _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
+          // _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
 
 
         }

@@ -2,6 +2,7 @@ package tech.illuminapps.cookbook.viewmodel
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -38,6 +39,10 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
 
     override fun onBindViewHolder(holder: ViewHolderExtendedRecipe, position: Int) {
 
+
+        binding.textView20.text = recipes[position].title
+
+
         if(recipes[position].isOwner){
             binding.authorGroup.isGone = !binding.authorGroup.isGone
         }
@@ -65,5 +70,11 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
 
     override fun getItemCount(): Int {
         return recipes.size
+    }
+
+    fun deleteFirst(){
+        recipes.removeAt(0)
+
+        notifyItemRemoved(0);
     }
 }
