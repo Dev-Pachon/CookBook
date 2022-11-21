@@ -54,6 +54,7 @@ class HomeFragmentViewModel: ViewModel()  {
 
                     }else{
                         posts.add(post!!)
+                        /*
                         var steps: ArrayList<Step> = arrayListOf()
                         val result3 = Firebase.firestore
                             .collection("posts").document(post.id).collection("steps").get().await()
@@ -78,7 +79,17 @@ class HomeFragmentViewModel: ViewModel()  {
                             }
 
                         }
-                        var recipe = Recipe(post.name,post.mainImage,ingredients,steps,false)
+
+                         */
+                        Log.e(">>>",post.userId)
+                        //var userId: String = post.userId.toString()
+                        val result2  =  Firebase.firestore.collection("users")
+                            .document(post.userId).get().await()
+
+                        val postUser = result2.toObject(tech.illuminapps.cookbook.model.User::class.java)
+
+
+                        var recipe = Recipe(post.name,post.mainImage,false, postUser!!.name,postUser!!.image,postUser!!.id)
                         //Log.e(">>>",recipe.toString())
                        // recipes2.add(recipe)
                         _recipes.postValue(recipe)
