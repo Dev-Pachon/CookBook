@@ -41,6 +41,7 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
 
 
         binding.textView20.text = recipes[position].title
+        binding.author.text = recipes[position].ownerName
 
 
         if(recipes[position].isOwner){

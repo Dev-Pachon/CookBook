@@ -81,7 +81,7 @@ class HomeFragmentViewModel: ViewModel()  {
                         }
 
                          */
-                        Log.e(">>>","${post.name} fue hecho por ${post.userId} con las categorias ${post.categories}")
+                       // Log.e(">>>","${post.name} fue hecho por ${post.userId} con las categorias ${post.categories}")
                         //var userId: String = post.userId.toString()
                         //val userIdTest = "${post.userId}"
                         val result2  =  Firebase.firestore.collection("users").document(post.userId).get().await()

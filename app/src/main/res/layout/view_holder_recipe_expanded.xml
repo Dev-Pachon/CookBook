@@ -11,11 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        tools:text="Cómo hacer un maravilloso sushi mundo"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/RecipeCV"
-        app:layout_constraintTop_toBottomOf="@+id/RecipeCV" />
+        app:layout_constraintTop_toBottomOf="@+id/RecipeCV"
+        tools:text="Cómo hacer un maravilloso sushi mundo" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/RecipeCV"
@@ -57,9 +57,9 @@
             android:drawableStart="@drawable/star"
             android:drawablePadding="8dp"
             android:paddingHorizontal="8dp"
-            tools:text="4,5"
             android:textColor="@color/white"
-            app:drawableTint="@color/white" />
+            app:drawableTint="@color/white"
+            tools:text="4,5" />
 
     </androidx.cardview.widget.CardView>
 
@@ -77,8 +77,8 @@
             android:id="@+id/imageView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/daily_activities_g698a2baf4_1920_1"
             android:contentDescription="@string/user_image_string"
+            android:src="@drawable/daily_activities_g698a2baf4_1920_1"
             app:srcCompat="@drawable/daily_activities_g698a2baf4_1920_1" />
     </androidx.cardview.widget.CardView>
 
@@ -87,10 +87,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        tools:text="By Dracule Mihawk"
         app:layout_constraintBottom_toBottomOf="@+id/cardView5"
         app:layout_constraintStart_toEndOf="@+id/cardView5"
-        app:layout_constraintTop_toTopOf="@+id/cardView5" />
+        app:layout_constraintTop_toTopOf="@+id/cardView5"
+        tools:text="By Dracule Mihawk" />
 
     <androidx.constraintlayout.helper.widget.Layer
         android:id="@+id/authorGroup"
