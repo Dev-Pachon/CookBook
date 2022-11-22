@@ -81,10 +81,10 @@ class HomeFragmentViewModel: ViewModel()  {
                         }
 
                          */
-                        Log.e(">>>",post.userId)
+                        Log.e(">>>","${post.name} fue hecho por ${post.userId} con las categorias ${post.categories}")
                         //var userId: String = post.userId.toString()
-                        val result2  =  Firebase.firestore.collection("users")
-                            .document(post.userId).get().await()
+                        //val userIdTest = "${post.userId}"
+                        val result2  =  Firebase.firestore.collection("users").document(post.userId).get().await()
 
                         val postUser = result2.toObject(tech.illuminapps.cookbook.model.User::class.java)
 
