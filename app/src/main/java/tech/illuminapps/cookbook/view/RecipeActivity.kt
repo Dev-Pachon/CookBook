@@ -14,6 +14,7 @@ import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityRecipeBinding
 import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
 import tech.illuminapps.cookbook.viewmodel.RecipeCommentAdapter
+import tech.illuminapps.cookbook.viewmodel.RecipeViewModel
 
 class RecipeActivity : AppCompatActivity() {
 
@@ -25,6 +26,7 @@ class RecipeActivity : AppCompatActivity() {
 
     private lateinit var adapterComments : RecipeCommentAdapter
 
+    private lateinit var recipeViewModel: RecipeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +35,22 @@ class RecipeActivity : AppCompatActivity() {
         layoutMComments = LinearLayoutManager(binding.root.context)
         binding.commentsRV.layoutManager = layoutMComments
         adapterComments = RecipeCommentAdapter()
+        recipeViewModel = RecipeViewModel()
         binding.commentsRV.adapter = adapterComments
 
-        val postId = intent.extras?.getString("recipe")
-        Log.e(">>>", "Id de la receta ${postId}")
+        val recipe = intent.extras?.getSerializable("recipe") as? Recipe
+
+            Log.e(">>>", "Id de la receta ${recipe!!.id}")
+
+        binding.nameRecipeTV.text = recipe!!.title
+        binding.authorNameTV.text = recipe!!.ownerName
+        recipeViewModel.getUserData()
+
+        recipeViewModel.user.observe(this){
+            binding.commentName.text = it.name
+
+        }
+
 
         for (i in 1..10){
             val comment = Comment("img1.jpg", "Carlos Jimmy","",10,"askldhlkashdas")

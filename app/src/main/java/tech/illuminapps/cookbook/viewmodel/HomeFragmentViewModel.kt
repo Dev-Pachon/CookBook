@@ -34,6 +34,7 @@ class HomeFragmentViewModel: ViewModel()  {
        // var recipes2: ArrayList<Recipe> = arrayListOf()
         viewModelScope.launch(Dispatchers.IO) {
 
+
             val result  =  Firebase.firestore.collection("users")
                 .document(Firebase.auth.currentUser!!.uid).get().await()
 

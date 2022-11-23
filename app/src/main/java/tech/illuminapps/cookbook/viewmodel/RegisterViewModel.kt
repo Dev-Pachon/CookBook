@@ -35,6 +35,7 @@ class RegisterViewModel:ViewModel() {
                 var followedCategories = ArrayList<String>()
                 var user = User(Firebase.auth.currentUser?.uid.toString(), name,email,followedCategories)
 
+               // User.instance = user
                 Firebase.firestore.collection("users").document(user.id).set(user)
 
 

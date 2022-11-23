@@ -53,13 +53,10 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
         }
         binding.RecipeCV.setOnClickListener {
 
-            val intent = Intent(binding.root.context,RecipeActivity::class.java).apply {
-
-            }
 
             ContextCompat.startActivity(
                 binding.root.context,
-                Intent(binding.root.context, RecipeActivity::class.java).putExtra("recipe",recipes[position].id),
+                Intent(binding.root.context, RecipeActivity::class.java).putExtra("recipe",recipes[position]),
                 null
             )
         }

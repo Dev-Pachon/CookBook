@@ -1,7 +1,9 @@
 package tech.illuminapps.cookbook.view
 
+import java.io.Serializable
 
-class Recipe{
+
+class Recipe:Serializable{
     var title:String=""
     var image:String=""
     var ingredients: ArrayList<Ingredient>? = arrayListOf()

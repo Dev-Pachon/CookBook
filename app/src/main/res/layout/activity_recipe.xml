@@ -237,15 +237,16 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:id="@+id/commentName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                tools:text="Jhonny Deep"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/myProfilePhotoCV"
                 app:layout_constraintStart_toEndOf="@+id/myProfilePhotoCV"
-                app:layout_constraintTop_toTopOf="@+id/myProfilePhotoCV" />
+                app:layout_constraintTop_toTopOf="@+id/myProfilePhotoCV"
+                tools:text="Jhonny Deep" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/commentIL"
