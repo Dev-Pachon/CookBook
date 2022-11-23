@@ -35,7 +35,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.recipesRV.adapter = adapter
 
         for (i in 1..5){
-            val recipe = Recipe("img1.jps", " ",true,"","","")
+            val recipe = Recipe("img1.jps", " ",true,"","","","")
 
             adapter.addRecipe(recipe)
         }

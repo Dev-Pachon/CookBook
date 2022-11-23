@@ -49,50 +49,53 @@ class HomeFragmentViewModel: ViewModel()  {
                 for(doc in result2.documents){
                     val post = doc.toObject(Post::class.java)
                     //Log.e(">>>",post.toString())
+                    post.let {
 
-                    if(posts.contains(post)){
+                        if(!posts.contains(post)){
+                            posts.add(post!!)
+                            /*
+                            var steps: ArrayList<Step> = arrayListOf()
+                            val result3 = Firebase.firestore
+                                .collection("posts").document(post.id).collection("steps").get().await()
+                            for(doc2 in result3.documents){
 
-                    }else{
-                        posts.add(post!!)
-                        /*
-                        var steps: ArrayList<Step> = arrayListOf()
-                        val result3 = Firebase.firestore
-                            .collection("posts").document(post.id).collection("steps").get().await()
-                        for(doc2 in result3.documents){
+                                val step = doc2.toObject(Step::class.java)
+                            //  Log.e(">>>",step.toString())
+                                if (step != null) {
+                                    steps.add(step)
+                                }
 
-                            val step = doc2.toObject(Step::class.java)
-                        //  Log.e(">>>",step.toString())
-                            if (step != null) {
-                                steps.add(step)
+                            }
+                            var ingredients: ArrayList<Ingredient> = arrayListOf()
+                            val result4 = Firebase.firestore
+                                .collection("posts").document(post.id).collection("ingredients").get().await()
+                            for(doc3 in result4.documents){
+
+                                val ingredient = doc3.toObject(Ingredient::class.java)
+                              // Log.e(">>>",ingredient.toString())
+                                if (ingredient != null) {
+                                    ingredients.add(ingredient)
+                                }
+
                             }
 
+                             */
+                            // Log.e(">>>","${post.name} fue hecho por ${post.userId} con las categorias ${post.categories}")
+                            //var userId: String = post.userId.toString()
+                            //val userIdTest = "${post.userId}"
+                            val result2  =  Firebase.firestore.collection("users").document(post.userId).get().await()
+
+                            val postUser = result2.toObject(tech.illuminapps.cookbook.model.User::class.java)
+
+
+                            var recipe = Recipe(post.name,post.mainImage,false, postUser!!.name,postUser!!.image,postUser!!.id,post!!.id)
+                            //Log.e(">>>",recipe.toString())
+                            // recipes2.add(recipe)
+                            _recipes.postValue(recipe)
+
                         }
-                        var ingredients: ArrayList<Ingredient> = arrayListOf()
-                        val result4 = Firebase.firestore
-                            .collection("posts").document(post.id).collection("ingredients").get().await()
-                        for(doc3 in result4.documents){
+                    }
 
-                            val ingredient = doc3.toObject(Ingredient::class.java)
-                          // Log.e(">>>",ingredient.toString())
-                            if (ingredient != null) {
-                                ingredients.add(ingredient)
-                            }
-
-                        }
-
-                         */
-                       // Log.e(">>>","${post.name} fue hecho por ${post.userId} con las categorias ${post.categories}")
-                        //var userId: String = post.userId.toString()
-                        //val userIdTest = "${post.userId}"
-                        val result2  =  Firebase.firestore.collection("users").document(post.userId).get().await()
-
-                        val postUser = result2.toObject(tech.illuminapps.cookbook.model.User::class.java)
-
-
-                        var recipe = Recipe(post.name,post.mainImage,false, postUser!!.name,postUser!!.image,postUser!!.id)
-                        //Log.e(">>>",recipe.toString())
-                       // recipes2.add(recipe)
-                        _recipes.postValue(recipe)
 
 
 
@@ -115,4 +118,3 @@ class HomeFragmentViewModel: ViewModel()  {
 
     }
 
-}

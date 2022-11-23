@@ -3,6 +3,7 @@ package tech.illuminapps.cookbook.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.annotation.MenuRes
@@ -33,6 +34,9 @@ class RecipeActivity : AppCompatActivity() {
         binding.commentsRV.layoutManager = layoutMComments
         adapterComments = RecipeCommentAdapter()
         binding.commentsRV.adapter = adapterComments
+
+        val postId = intent.extras?.getString("recipe")
+        Log.e(">>>", "Id de la receta ${postId}")
 
         for (i in 1..10){
             val comment = Comment("img1.jpg", "Carlos Jimmy","",10,"askldhlkashdas")

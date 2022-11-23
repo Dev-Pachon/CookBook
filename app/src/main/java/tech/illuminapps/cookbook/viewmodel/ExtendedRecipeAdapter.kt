@@ -52,9 +52,14 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
             Toast.makeText(binding.root.context,"Receta guardada", Toast.LENGTH_LONG).show()
         }
         binding.RecipeCV.setOnClickListener {
+
+            val intent = Intent(binding.root.context,RecipeActivity::class.java).apply {
+
+            }
+
             ContextCompat.startActivity(
                 binding.root.context,
-                Intent(binding.root.context, RecipeActivity::class.java),
+                Intent(binding.root.context, RecipeActivity::class.java).putExtra("recipe",recipes[position].id),
                 null
             )
         }

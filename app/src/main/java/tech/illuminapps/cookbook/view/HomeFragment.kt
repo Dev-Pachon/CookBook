@@ -92,7 +92,7 @@ class HomeFragment : Fragment() {
 
 
 
-              val recipe = Recipe("img1.jps", "",false,"","","")
+              val recipe = Recipe("img1.jps", "",false,"","","","")
                adapterPopularRecipes.addRecipe(recipe)
 
 
