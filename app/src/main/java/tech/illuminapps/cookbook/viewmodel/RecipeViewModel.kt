@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import tech.illuminapps.cookbook.model.Follower
 import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.view.Comment
 
@@ -22,6 +22,9 @@ class RecipeViewModel: ViewModel() {
 
     private val _comment = MutableLiveData(Comment())
     val comment: LiveData<Comment> get() = _comment
+
+    private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
+    val authState : LiveData<AuthState> get() = _authState
 
     fun getUserData(){
 
@@ -64,6 +67,32 @@ class RecipeViewModel: ViewModel() {
                 }
 
             }
+
+        }
+    }
+    fun addFollower(postOwner:String,currentUser:String){
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = Firebase.firestore.collection("users")
+                .document(Firebase.auth.currentUser!!.uid).collection("following").document(postOwner).get().await()
+            Log.e(">>>","Ya hizo el result")
+            if(!result.exists()){
+                Log.e(">>>","Hizo la comprobacion")
+                Firebase.firestore.collection("users").document(currentUser).collection("following").document(postOwner).set(Follower(postOwner)).addOnSuccessListener(){
+
+                    Firebase.firestore.collection("users").document(postOwner).collection("followers").document(currentUser).set(Follower(currentUser)).addOnSuccessListener(){
+
+                        Log.e(">>>","Debio crearse")
+
+                        _authState.postValue(AuthState(AuthResult.SUCCESS,"sucess"))
+                    }
+
+                }
+
+
+            }
+
+
 
         }
     }

@@ -58,6 +58,9 @@ class RecipeActivity : AppCompatActivity() {
 
             adapterComments.addComment(it)
         }
+        recipeViewModel.authState.observe(this){
+            binding.follow.text = "Siguiendo"
+        }
 
         for (i in 1..10){
             val comment = Comment("img1.jpg", "Carlos Jimmy","",10,"askldhlkashdas","")
@@ -82,6 +85,11 @@ class RecipeActivity : AppCompatActivity() {
             layoutMComments.smoothScrollToPosition(binding.commentsRV,null, 0)
             binding.commentIL.editText?.text?.clear()
             recipeViewModel.addComment(comment, recipe.id)
+        }
+        binding.follow.setOnClickListener {
+
+            recipeViewModel.addFollower(recipe!!.ownerId,currentUser.id)
+
         }
 
     }

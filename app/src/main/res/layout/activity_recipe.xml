@@ -179,6 +179,7 @@
                 app:layout_constraintTop_toTopOf="@+id/authorPhotoCV" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/follow"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
