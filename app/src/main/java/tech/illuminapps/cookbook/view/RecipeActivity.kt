@@ -12,9 +12,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityRecipeBinding
+import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
 import tech.illuminapps.cookbook.viewmodel.RecipeCommentAdapter
 import tech.illuminapps.cookbook.viewmodel.RecipeViewModel
+import java.util.*
 
 class RecipeActivity : AppCompatActivity() {
 
@@ -45,15 +47,20 @@ class RecipeActivity : AppCompatActivity() {
         binding.nameRecipeTV.text = recipe!!.title
         binding.authorNameTV.text = recipe!!.ownerName
         recipeViewModel.getUserData()
+        recipeViewModel.getComments(recipe.id)
 
+        var currentUser: User = User()
         recipeViewModel.user.observe(this){
             binding.commentName.text = it.name
+            currentUser = it
+        }
+        recipeViewModel.comment.observe(this){
 
+            adapterComments.addComment(it)
         }
 
-
         for (i in 1..10){
-            val comment = Comment("img1.jpg", "Carlos Jimmy","",10,"askldhlkashdas")
+            val comment = Comment("img1.jpg", "Carlos Jimmy","",10,"askldhlkashdas","")
             adapterComments.addComment(comment)
         }
 
@@ -70,11 +77,13 @@ class RecipeActivity : AppCompatActivity() {
         }
 
         binding.commentIL.setEndIconOnClickListener {
-            val comment= Comment("", "Henry Cavil", "", 50,binding.commentIL.editText?.text.toString())
+            val comment= Comment(UUID.randomUUID().toString(), currentUser.name,"" ,0,binding.commentIL.editText?.text.toString(),currentUser.id)
             adapterComments.addComment(comment)
             layoutMComments.smoothScrollToPosition(binding.commentsRV,null, 0)
             binding.commentIL.editText?.text?.clear()
+            recipeViewModel.addComment(comment, recipe.id)
         }
+
     }
 
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
