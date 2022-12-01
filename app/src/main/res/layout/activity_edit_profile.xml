@@ -55,6 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/pfpIV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/user_image_string"
@@ -119,6 +120,7 @@
                 app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large">
 
                 <EditText
+                    android:id="@+id/descriptionET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start|top"

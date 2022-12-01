@@ -185,6 +185,7 @@ class CreateRecipeActivity : AppCompatActivity(), onGalleryCalled {
 
 
 
+
             /*
 
             uri?.let {
