@@ -52,7 +52,7 @@ class HomeFragmentViewModel: ViewModel()  {
                     //Log.e(">>>",post.toString())
                     post.let {
 
-                        if(!posts.contains(post)){
+                        if(!posts.contains(post) and !(it!!.userId.equals(Firebase.auth.currentUser!!.uid))){
                             posts.add(post!!)
                             /*
                             var steps: ArrayList<Step> = arrayListOf()

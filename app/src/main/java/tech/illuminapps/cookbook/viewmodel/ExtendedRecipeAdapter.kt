@@ -25,7 +25,6 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
     private val recipes: ArrayList<Recipe> = ArrayList()
 
     fun addRecipe(recipe: Recipe) {
-        //Log.e(">>>",recipe.id)
         recipes.add(recipe)
         notifyItemInserted(itemCount)
     }
@@ -65,7 +64,7 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
         binding.authorGroup.setOnClickListener{
             ContextCompat.startActivity(
                 binding.root.context,
-                Intent(binding.root.context, ProfileActivity::class.java),
+                Intent(binding.root.context, ProfileActivity::class.java).putExtra("userId",recipes[position].ownerId),
                 null
             )
         }

@@ -25,7 +25,8 @@ class MyProfileFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
     private lateinit var loginFragment: LoginFragment
-    private val userViewModel: UserViewModel by viewModels()
+    //private var userViewModel: UserViewModel by viewModels()
+    private lateinit var userViewModel: UserViewModel
 
 
     val binding: FragmentMyProfileBinding by lazy {
@@ -55,16 +56,26 @@ class MyProfileFragment : Fragment() {
 
         adapter = ExtendedRecipeAdapter()
 
+        userViewModel = UserViewModel()
 
         binding.myRecipesRV.adapter = adapter
+
+        userViewModel.getUserPost()
+
+
+        userViewModel.recipes.observe(viewLifecycleOwner){
+
+            adapter.addRecipe(it)
+        }
+
         /*
         for (i in 1..5){
             val recipe = Recipe("img1.jps","imagen ", null,null,null,true)
 
             adapter.addRecipe(recipe)
         }
+    */
 
-         */
 
         // Inflate the layout for this fragment
         return binding.root
