@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
 
                 adapterExtendedRecipe.addRecipe(it)
 
-            Log.e(">>>",it.toString())
+           // Log.e(">>>",it.toString())
 
 /*
         for (i in 0..it.size - 1) {

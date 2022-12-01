@@ -2,13 +2,18 @@ package tech.illuminapps.cookbook.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityProfileBinding
 import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
+import tech.illuminapps.cookbook.viewmodel.ProfileViewModel
 
 class ProfileActivity : AppCompatActivity() {
+
+    private lateinit var profileViewModel: ProfileViewModel
 
     val binding: ActivityProfileBinding by lazy {
         ActivityProfileBinding.inflate(layoutInflater)
@@ -17,6 +22,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var layoutMSaved : LinearLayoutManager
 
     private lateinit var adapter :ExtendedRecipeAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,15 +37,37 @@ class ProfileActivity : AppCompatActivity() {
 
         adapter = ExtendedRecipeAdapter()
 
-
         binding.recipesRV.adapter = adapter
 
+        profileViewModel = ProfileViewModel()
+
+
+
+
+        //val recipe = Recipe("img1.jps", " ",true,"","","","")
+        //adapter.addRecipe(recipe)
+
+       profileViewModel.getUserPost()
+
+
+        profileViewModel.recipes.observe(this){
+
+            adapter.addRecipe(it)
+
+        }
+
+
+
+
+/*
         for (i in 1..5){
             val recipe = Recipe("img1.jps", " ",true,"","","","")
 
             adapter.addRecipe(recipe)
         }
 
+
+ */
         binding.backBtn.setOnClickListener {
             onBackPressed()
         }

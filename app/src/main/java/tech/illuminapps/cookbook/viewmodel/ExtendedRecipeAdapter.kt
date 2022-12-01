@@ -25,6 +25,7 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
     private val recipes: ArrayList<Recipe> = ArrayList()
 
     fun addRecipe(recipe: Recipe) {
+        //Log.e(">>>",recipe.id)
         recipes.add(recipe)
         notifyItemInserted(itemCount)
     }

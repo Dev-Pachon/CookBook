@@ -61,11 +61,12 @@ class RecipeActivity : AppCompatActivity() {
         recipeViewModel.authState.observe(this){
             binding.follow.text = "Siguiendo"
         }
-
+        /*
         for (i in 1..10){
             val comment = Comment("img1.jpg", "Carlos Jimmy","",10,"askldhlkashdas","")
             adapterComments.addComment(comment)
         }
+        */
 
         binding.startRecipeBtn.setOnClickListener {
             startActivity(Intent(binding.root.context, DetailedRecipeActivity::class.java))
