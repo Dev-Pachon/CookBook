@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import tech.illuminapps.cookbook.model.Follower
 import tech.illuminapps.cookbook.model.Post
 import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.view.Recipe
@@ -70,6 +71,36 @@ class ProfileViewModel: ViewModel(){
 
         }
 
+    }
+    fun addFollower(postOwner:String){
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = Firebase.firestore.collection("users")
+                .document(Firebase.auth.currentUser!!.uid).collection("following").document(postOwner).get().await()
+            Log.e(">>>","Ya hizo el result")
+            if(!result.exists()){
+                Log.e(">>>","Hizo la comprobacion")
+                Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).collection("following").document(postOwner).set(
+                    Follower(postOwner)
+                ).addOnSuccessListener(){
+
+                    Firebase.firestore.collection("users").document(postOwner).collection("followers").document(Firebase.auth.currentUser!!.uid).set(
+                        Follower(Firebase.auth.currentUser!!.uid)
+                    ).addOnSuccessListener(){
+
+                      //  Log.e(">>>","Debio crearse")
+
+                        _authState.postValue(AuthState(AuthResult.SUCCESS,"sucess"))
+                    }
+
+                }
+
+
+            }
+
+
+
+        }
     }
 
 }

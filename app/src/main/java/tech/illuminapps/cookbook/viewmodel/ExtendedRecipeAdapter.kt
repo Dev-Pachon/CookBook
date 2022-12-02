@@ -62,7 +62,7 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
         }
 
         binding.authorGroup.setOnClickListener{
-            Log.e(">>>",recipes[position].ownerName)
+          Log.e(">>>",recipes[position].ownerName)
             ContextCompat.startActivity(
                 binding.root.context,
                 Intent(binding.root.context, ProfileActivity::class.java).putExtra("userId",recipes[position].ownerId),

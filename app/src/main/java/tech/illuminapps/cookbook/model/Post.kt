@@ -6,5 +6,6 @@ data class Post(
     var name:String = "",
     var categories: ArrayList<String> = arrayListOf(),
     var userId:String = "",
-    var mainImage: String = ""
+    var mainImage: String = "",
+    //var grade: String = "0"
 )

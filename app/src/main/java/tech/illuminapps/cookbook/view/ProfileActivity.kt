@@ -43,7 +43,7 @@ class ProfileActivity : AppCompatActivity() {
 
         profileViewModel = ProfileViewModel()
 
-
+        binding.followBtn.text = "Seguir"
 
 
         //val recipe = Recipe("img1.jps", " ",true,"","","","")
@@ -64,17 +64,23 @@ class ProfileActivity : AppCompatActivity() {
         profileViewModel.recipes.observe(this){
 
             adapter.addRecipe(it)
-            Log.e(">>>",it.ownerName)
+           // Log.e(">>>",it.ownerName)
 
         }
-        /*
+        binding.followBtn.setOnClickListener {
+
+            profileViewModel.addFollower(userId)
+
+        }
+
+
         profileViewModel.authState.observe(this){
 
-            adapter.deleteFirst()
+            binding.followBtn.text = "Siguiendo"
         }
 
 
-         */
+
 
 
 

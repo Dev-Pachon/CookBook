@@ -13,6 +13,7 @@ class Recipe:Serializable{
     var ownerImage: String = ""
     var ownerId: String = ""
     var id: String = ""
+    //var grade: String = ""
 
     constructor()
 
@@ -35,7 +36,8 @@ class Recipe:Serializable{
         ownerName: String,
         ownerImage: String,
         ownerId: String,
-        id: String
+        id: String,
+        //grade: String
     ) {
         this.title = title
         this.image = image
@@ -46,7 +48,9 @@ class Recipe:Serializable{
         this.ownerImage = ownerImage
         this.ownerId = ownerId
         this.id = id
+       // this.grade = grade
     }
+
 
 }
 
