@@ -23,6 +23,9 @@ class ProfileViewModel: ViewModel(){
     private val _user = MutableLiveData(User())
     val user: LiveData<User> get() = _user
 
+    private val _authState = MutableLiveData(AuthState(AuthResult.IDLE,""))
+    val authState : LiveData<AuthState> get() = _authState
+
     fun getUserInfo(userId:String){
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -49,18 +52,21 @@ class ProfileViewModel: ViewModel(){
                 val post = doc.toObject(Post::class.java)
 
                 post.let {
-                    val result2  =  Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).get().await()
+                    val result2  =  Firebase.firestore.collection("users").document(userId).get().await()
 
                     val postUser = result2.toObject(tech.illuminapps.cookbook.model.User::class.java)
 
                     var recipe = Recipe(it!!.name,it.mainImage,true, postUser!!.name,postUser!!.image,postUser!!.id,post!!.id)
-                    Log.e(">>>",recipe.id)
+                   // Log.e(">>>",recipe.id)
                     _recipes.postValue(recipe)
                 }
 
 
 
+
             }
+            _authState.postValue(AuthState(AuthResult.SUCCESS,"Success"))
+
 
         }
 

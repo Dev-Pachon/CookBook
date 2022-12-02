@@ -44,6 +44,7 @@ class RecipeActivity : AppCompatActivity() {
 
         binding.nameRecipeTV.text = recipe!!.title
         binding.authorNameTV.text = recipe!!.ownerName
+        Log.e(">>>",recipe!!.ownerName)
         recipeViewModel.getUserData()
         recipeViewModel.getComments(recipe.id)
 

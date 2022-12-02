@@ -2,6 +2,7 @@ package tech.illuminapps.cookbook.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -63,9 +64,17 @@ class ProfileActivity : AppCompatActivity() {
         profileViewModel.recipes.observe(this){
 
             adapter.addRecipe(it)
+            Log.e(">>>",it.ownerName)
 
         }
+        /*
+        profileViewModel.authState.observe(this){
 
+            adapter.deleteFirst()
+        }
+
+
+         */
 
 
 
