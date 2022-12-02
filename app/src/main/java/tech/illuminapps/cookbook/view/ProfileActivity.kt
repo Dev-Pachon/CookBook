@@ -28,6 +28,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        var userId = intent.getSerializableExtra("userId") as String
 
         layoutMSaved = LinearLayoutManager(binding.root.context)
 
@@ -47,7 +48,16 @@ class ProfileActivity : AppCompatActivity() {
         //val recipe = Recipe("img1.jps", " ",true,"","","","")
         //adapter.addRecipe(recipe)
 
-       profileViewModel.getUserPost()
+       profileViewModel.getUserInfo(userId)
+
+        profileViewModel.user.observe(this){
+
+            binding.nameTV.text = it.name
+            binding.descriptionTV.text = it.description
+            binding.numFollowersTV.text = it.followerQuantity
+            binding.numFollowingTV.text = it.followingQuantity
+            binding.numRecipesTV.text = it.postQuantity
+        }
 
 
         profileViewModel.recipes.observe(this){

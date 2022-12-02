@@ -21,19 +21,28 @@ class EditProfileViewModel:ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
 
-            if(pfp !=null) {
-                Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).update("name",name)
-               // Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).update("followedCategories",followedCategories)
+            Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).update("name",name,"description",description,"followedCategories",followedCategories,"profilePicture",pfp.toString())
+
+            //Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).update("followedCategories",followedCategories)
 
 
-              //  Firebase.storage.reference.child("users").child(Firebase.auth.currentUser!!.uid)
+            Firebase.storage.reference.child("users").child(Firebase.auth.currentUser!!.uid).child(pfp.toString()).putFile(pfp)
                 //    .child(pfp.toString()).putFile(pfp)
 
 
-            }
+
 
 
         }
+    }
+    fun updateDataNopfp(name:String,description:String,followedCategories: ArrayList<String>){
+
+        viewModelScope.launch(Dispatchers.IO) {
+            Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).update("name",name,"description",description,"followedCategories",followedCategories)
+
+
+        }
+
     }
 
 

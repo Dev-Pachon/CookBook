@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import tech.illuminapps.cookbook.databinding.ActivityEditProfileBinding
+import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.viewmodel.EditProfileViewModel
 
 class EditProfileActivity : AppCompatActivity() {
@@ -17,12 +18,13 @@ class EditProfileActivity : AppCompatActivity() {
     val binding: ActivityEditProfileBinding by lazy {
         ActivityEditProfileBinding.inflate(layoutInflater)
     }
-    private var mainImageUri: Uri ?= null
+    private lateinit var mainImageUri: Uri
     private lateinit var editProfileViewModel: EditProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val user = intent.getSerializableExtra("user") as? User
 
         val galLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -30,6 +32,8 @@ class EditProfileActivity : AppCompatActivity() {
 
         )
         editProfileViewModel = EditProfileViewModel()
+        binding.editText.setText(user!!.name)
+        binding.descriptionET.setText(user!!.description)
 
         var categories = arrayListOf("Desayuno","Italiana","Pasta","Francesa","Española","Mexicana","Argentina","Comida Rapida","Hamburguesa","Tipica")
 
@@ -39,6 +43,9 @@ class EditProfileActivity : AppCompatActivity() {
             binding.chipGroup.addView(chip)
             setContentView(binding.root)
             chip.id = categorie
+            if(user!!.followedCategories.contains(categories.get(categorie))){
+                binding.chipGroup.check(categorie)
+            }
         }
 
         binding.nextBtn.setOnClickListener{
@@ -56,8 +63,16 @@ class EditProfileActivity : AppCompatActivity() {
 
 
                 }
-            editProfileViewModel.updateUserData(name,description,selectedCategories,mainImageUri!!)
 
+                if(::mainImageUri.isInitialized) {
+                    editProfileViewModel.updateUserData(name,description,selectedCategories,mainImageUri!!)
+
+
+                }else{
+
+                    editProfileViewModel.updateDataNopfp(name,description,selectedCategories)
+
+                }
 
             }
         editProfileViewModel.authState.observe(this){

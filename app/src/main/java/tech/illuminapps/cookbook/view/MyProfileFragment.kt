@@ -17,6 +17,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.FragmentMyProfileBinding
+import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
 import tech.illuminapps.cookbook.viewmodel.UserViewModel
 
@@ -27,7 +28,7 @@ class MyProfileFragment : Fragment() {
     private lateinit var loginFragment: LoginFragment
     //private var userViewModel: UserViewModel by viewModels()
     private lateinit var userViewModel: UserViewModel
-
+    private lateinit var user:User
 
     val binding: FragmentMyProfileBinding by lazy {
         FragmentMyProfileBinding.inflate(layoutInflater)
@@ -60,8 +61,18 @@ class MyProfileFragment : Fragment() {
 
         binding.myRecipesRV.adapter = adapter
 
-        userViewModel.getUserPost()
+        userViewModel.getUserInfo()
 
+        userViewModel.user.observe(viewLifecycleOwner){
+
+
+            binding.nameTV.text = it.name
+            binding.descriptionTV.text = it.description
+            binding.numRecipesTV.text = it.postQuantity
+            binding.numFollowersTV.text = it.followerQuantity
+            binding.numFollowingTV.text = it.followingQuantity
+            user = it!!
+        }
 
         userViewModel.recipes.observe(viewLifecycleOwner){
 
@@ -101,7 +112,7 @@ class MyProfileFragment : Fragment() {
                     true
                 }
                 R.id.edit_profile_option -> {
-                    startActivity(Intent(binding.root.context, EditProfileActivity::class.java))
+                    startActivity(Intent(binding.root.context, EditProfileActivity::class.java).putExtra("user",user))
                     true
                 }
                 else -> false

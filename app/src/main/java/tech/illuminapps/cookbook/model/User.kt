@@ -1,12 +1,17 @@
 package tech.illuminapps.cookbook.model
 
-class User{
+import java.io.Serializable
+
+class User:Serializable{
    var id:String = ""
    var name: String = ""
    var email: String = ""
    var followedCategories: ArrayList<String> = arrayListOf()
    var image:String = ""
    var description: String = ""
+   var followerQuantity: String = ""
+   var followingQuantity: String = ""
+   var postQuantity: String = ""
 
    constructor(id: String, name: String, email: String, followedCategories: ArrayList<String>) {
       this.id = id

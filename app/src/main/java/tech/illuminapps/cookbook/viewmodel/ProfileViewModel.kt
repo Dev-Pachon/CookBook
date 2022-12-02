@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import tech.illuminapps.cookbook.model.Post
+import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.view.Recipe
 
 class ProfileViewModel: ViewModel(){
@@ -19,18 +20,31 @@ class ProfileViewModel: ViewModel(){
     private val _recipes = MutableLiveData(Recipe())
     val recipes: LiveData<Recipe> get() = _recipes
 
-    fun getUserPost(){
+    private val _user = MutableLiveData(User())
+    val user: LiveData<User> get() = _user
 
-        Log.e(">>>","Esta entrando al metodo")
+    fun getUserInfo(userId:String){
 
         viewModelScope.launch(Dispatchers.IO) {
 
-            Log.e(">>>","Deberia mostrar el uid ${Firebase.auth.currentUser!!.uid.toString()}")
-            val result = Firebase.firestore.collection("posts").whereEqualTo("userId",
-                Firebase.auth.currentUser!!.uid.toString()).get().await()
+            val result = Firebase.firestore.collection("users").document(userId).get().await()
+
+            val user2 = result.toObject(tech.illuminapps.cookbook.model.User::class.java)
+
+            val result2 = Firebase.firestore.collection("users").document(userId).collection("followers").get().await()
+
+            val result3 = Firebase.firestore.collection("users").document(userId).collection("following").get().await()
+
+            val result4 = Firebase.firestore.collection("posts").whereEqualTo("userId",
+                userId).get().await()
+
+            user2!!.followerQuantity = result2.documents.size.toString()
+            user2!!.followingQuantity = result3.documents.size.toString()
+            user2!!.postQuantity = result4.documents.size.toString()
+            _user.postValue(user2)
 
 
-            for(doc in result.documents){
+            for(doc in result4.documents){
 
                 val post = doc.toObject(Post::class.java)
 
@@ -51,6 +65,5 @@ class ProfileViewModel: ViewModel(){
         }
 
     }
-
 
 }
