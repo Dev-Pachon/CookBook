@@ -42,8 +42,6 @@ class RecipeActivity : AppCompatActivity() {
 
         val recipe = intent.extras?.getSerializable("recipe") as? Recipe
 
-            Log.e(">>>", "Id de la receta ${recipe!!.id}")
-
         binding.nameRecipeTV.text = recipe!!.title
         binding.authorNameTV.text = recipe!!.ownerName
         recipeViewModel.getUserData()
