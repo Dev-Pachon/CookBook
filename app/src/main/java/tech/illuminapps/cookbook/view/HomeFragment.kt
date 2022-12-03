@@ -1,5 +1,6 @@
 package tech.illuminapps.cookbook.view
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -64,6 +65,8 @@ class HomeFragment : Fragment() {
         binding.tendencesRV.adapter = adapterPopularRecipes
         binding.popularProfilesRV.adapter = adapterPopularProfile
         binding.feedRV.adapter = adapterExtendedRecipe
+
+
 
         homeFragmentViewModel.getFollowedCategoriesPost()
         homeFragmentViewModel.recipes.observe(viewLifecycleOwner){
