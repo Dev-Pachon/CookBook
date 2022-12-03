@@ -77,7 +77,8 @@ class ExtendedRecipeAdapter : RecyclerView.Adapter<ViewHolderExtendedRecipe>() {
     }
 
     fun deleteFirst(){
-        recipes.removeAt(0)
+
+        recipes.removeAt(0);
 
         notifyItemRemoved(0);
     }

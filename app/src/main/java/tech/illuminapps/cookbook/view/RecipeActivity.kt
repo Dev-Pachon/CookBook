@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
@@ -30,6 +31,8 @@ class RecipeActivity : AppCompatActivity() {
 
     private lateinit var recipeViewModel: RecipeViewModel
 
+    private lateinit var recipeGlobal: Recipe
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -41,9 +44,11 @@ class RecipeActivity : AppCompatActivity() {
         binding.commentsRV.adapter = adapterComments
 
         val recipe = intent.extras?.getSerializable("recipe") as? Recipe
+        recipeGlobal = recipe!!
 
         binding.nameRecipeTV.text = recipe!!.title
         binding.authorNameTV.text = recipe!!.ownerName
+        binding.follow.text = "Seguir"
         Log.e(">>>",recipe!!.ownerName)
         recipeViewModel.getUserData()
         recipeViewModel.getComments(recipe.id)
@@ -58,7 +63,15 @@ class RecipeActivity : AppCompatActivity() {
             adapterComments.addComment(it)
         }
         recipeViewModel.authState.observe(this){
-            binding.follow.text = "Siguiendo"
+
+
+            when(it.message){
+
+                "Seguir" ->     binding.follow.text = "Siguiendo"
+                "Guardar" -> Toast.makeText(this,"Se ha guardado correctamente",Toast.LENGTH_LONG)
+
+            }
+
         }
         /*
         for (i in 1..10){
@@ -112,7 +125,7 @@ class RecipeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.save_recipe_option -> {
-
+                    recipeViewModel.saveRecipe(recipeGlobal.id)
                     true
                 }
                 else -> false
