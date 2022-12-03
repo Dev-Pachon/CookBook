@@ -89,7 +89,7 @@ class HomeFragmentViewModel: ViewModel()  {
                             val postUser = result2.toObject(tech.illuminapps.cookbook.model.User::class.java)
 
 
-                            var recipe = Recipe(post.name,post.mainImage,false, postUser!!.name,postUser!!.image,postUser!!.id,post!!.id)
+                            var recipe = Recipe(post!!.name,post!!.mainImage,false, postUser!!.name,postUser!!.image,postUser!!.id,post!!.id)
                             //Log.e(">>>",recipe.toString())
                             // recipes2.add(recipe)
                             _recipes.postValue(recipe)
