@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         binding.feedRV.adapter = adapterExtendedRecipe
 
 
-
+        homeFragmentViewModel.getTrendingPost()
         homeFragmentViewModel.getFollowedCategoriesPost()
         homeFragmentViewModel.recipes.observe(viewLifecycleOwner){
 
@@ -95,11 +95,19 @@ class HomeFragment : Fragment() {
 
 
 
-              val recipe = Recipe("img1.jps", "",false,"","","","")
-               adapterPopularRecipes.addRecipe(recipe)
+
 
 
         }
+        //val recipe = Recipe("img1.jps", "",false,"","","","")
+        //adapterPopularRecipes.addRecipe(recipe)
+        homeFragmentViewModel.recipesTrending.observe(viewLifecycleOwner){
+
+            adapterPopularRecipes.addRecipe(it!!)
+
+        }
+
+
 
 
 
