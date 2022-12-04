@@ -69,8 +69,8 @@ class MyProfileFragment : Fragment() {
             binding.nameTV.text = it.name
             binding.descriptionTV.text = it.description
             binding.numRecipesTV.text = it.postQuantity
-            binding.numFollowersTV.text = it.followerQuantity
-            binding.numFollowingTV.text = it.followingQuantity
+            binding.numFollowersTV.text = it.followerQuantity.toString()
+            binding.numFollowingTV.text = it.followingQuantity.toString()
             user = it!!
         }
 
