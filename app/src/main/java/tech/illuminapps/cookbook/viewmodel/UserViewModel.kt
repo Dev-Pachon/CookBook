@@ -73,8 +73,8 @@ class UserViewModel : ViewModel() {
             val result4 = Firebase.firestore.collection("posts").whereEqualTo("userId",
                 Firebase.auth.currentUser!!.uid.toString()).get().await()
 
-            user2!!.followerQuantity = result2.documents.size.toString()
-            user2!!.followingQuantity = result3.documents.size.toString()
+            user2!!.followerQuantity = result2.documents.size
+            user2!!.followingQuantity = result3.documents.size
             user2!!.postQuantity = result4.documents.size.toString()
             _user.postValue(user2)
 

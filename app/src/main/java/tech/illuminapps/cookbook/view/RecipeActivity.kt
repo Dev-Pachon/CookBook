@@ -93,7 +93,7 @@ class RecipeActivity : AppCompatActivity() {
         */
 
         binding.startRecipeBtn.setOnClickListener {
-            startActivity(Intent(binding.root.context, DetailedRecipeActivity::class.java))
+            startActivity(Intent(binding.root.context, DetailedRecipeActivity::class.java).putExtra("recipe",recipe!!))
         }
 
         binding.backBtn.setOnClickListener {
