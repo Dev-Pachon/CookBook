@@ -55,8 +55,8 @@ class ProfileActivity : AppCompatActivity() {
 
             binding.nameTV.text = it.name
             binding.descriptionTV.text = it.description
-            binding.numFollowersTV.text = it.followerQuantity
-            binding.numFollowingTV.text = it.followingQuantity
+            binding.numFollowersTV.text = it.followerQuantity.toString()
+            binding.numFollowingTV.text = it.followingQuantity.toString()
             binding.numRecipesTV.text = it.postQuantity
         }
 

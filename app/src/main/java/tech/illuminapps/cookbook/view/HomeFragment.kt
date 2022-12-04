@@ -66,7 +66,7 @@ class HomeFragment : Fragment() {
         binding.popularProfilesRV.adapter = adapterPopularProfile
         binding.feedRV.adapter = adapterExtendedRecipe
 
-
+        homeFragmentViewModel.getPopularProfiles()
         homeFragmentViewModel.getTrendingPost()
         homeFragmentViewModel.getFollowedCategoriesPost()
         homeFragmentViewModel.recipes.observe(viewLifecycleOwner){
@@ -113,12 +113,19 @@ class HomeFragment : Fragment() {
 
 
 
+        homeFragmentViewModel.popularProfile.observe(viewLifecycleOwner){
 
+            adapterPopularProfile.addProfile(it!!)
+
+        }
+        /*
         for (i in 1..5){
             val profile = PopularProfile("$i","Name$i" ,"image$i")
             adapterPopularProfile.addProfile(profile)
         }
 
+
+         */
         // Inflate the layout for this fragment
 
         return binding.root

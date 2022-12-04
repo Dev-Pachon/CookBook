@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -15,7 +14,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import tech.illuminapps.cookbook.model.Follower
 import tech.illuminapps.cookbook.model.Post
+import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.view.Ingredient
+import tech.illuminapps.cookbook.view.PopularProfile
 import tech.illuminapps.cookbook.view.Recipe
 import tech.illuminapps.cookbook.view.Step
 import kotlin.math.log
@@ -30,6 +31,9 @@ class HomeFragmentViewModel: ViewModel()  {
 
     private val _recipesTrending = MutableLiveData(Recipe())
     val recipesTrending: LiveData<Recipe> get() = _recipesTrending
+
+    private val _popularProfile = MutableLiveData(PopularProfile())
+    val popularProfile: LiveData<PopularProfile> get() = _popularProfile
 
    // var recipes: ArrayList<Recipe> = arrayListOf()
 
@@ -186,6 +190,31 @@ class HomeFragmentViewModel: ViewModel()  {
         }
 
 
+
+
+    }
+    fun getPopularProfiles(){
+
+        viewModelScope.launch(Dispatchers.IO){
+
+            val result = Firebase.firestore.collection("users").orderBy("followerQuantity").limit(10).get().await()
+
+            for(doc in result.documents){
+
+                val user = doc.toObject(User::class.java)
+                user.let {
+                    Log.e(">>>", "Usuario ${it!!.name}")
+                    val popularProfile = PopularProfile(it!!.id,it!!.name,it!!.image)
+                    _popularProfile.postValue(popularProfile)
+                }
+
+
+
+            }
+
+
+
+        }
 
 
     }

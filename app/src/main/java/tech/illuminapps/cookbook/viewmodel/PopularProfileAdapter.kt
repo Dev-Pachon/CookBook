@@ -36,7 +36,7 @@ class PopularProfileAdapter : RecyclerView.Adapter<ViewHolderPopularProfile>() {
         binding.root.setOnClickListener {
             ContextCompat.startActivity(
                 binding.root.context,
-                Intent(binding.root.context, ProfileActivity::class.java),
+                Intent(binding.root.context, ProfileActivity::class.java).putExtra("userId",profiles[position].id),
                 null
             )
         }

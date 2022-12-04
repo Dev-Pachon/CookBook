@@ -87,9 +87,33 @@ class RecipeViewModel: ViewModel() {
               //  Log.e(">>>","Hizo la comprobacion")
                 Firebase.firestore.collection("users").document(currentUser).collection("following").document(postOwner).set(Follower(postOwner)).addOnSuccessListener(){
 
+
+                    viewModelScope.launch(Dispatchers.IO) {
+                        val result2 =
+                            Firebase.firestore.collection("users").document(currentUser).get().await()
+
+                        val cU = result2.toObject(User::class.java)
+                        cU.let {
+                            it!!.followingQuantity = it!!.followingQuantity+1
+                        }
+
+                    }
+
+
+
                     Firebase.firestore.collection("users").document(postOwner).collection("followers").document(currentUser).set(Follower(currentUser)).addOnSuccessListener(){
 
                        // Log.e(">>>","Debio crearse")
+                        viewModelScope.launch(Dispatchers.IO) {
+                            val result2 =
+                                Firebase.firestore.collection("users").document(postOwner).get().await()
+
+                            val cU = result2.toObject(User::class.java)
+                            cU.let {
+                                it!!.followerQuantity = it!!.followerQuantity+1
+                            }
+
+                        }
 
                         _authState.postValue(AuthState(AuthResult.SUCCESS,"Seguidor"))
                     }

@@ -42,10 +42,12 @@ class ProfileViewModel: ViewModel(){
             val result4 = Firebase.firestore.collection("posts").whereEqualTo("userId",
                 userId).get().await()
 
-            user2!!.followerQuantity = result2.documents.size.toString()
-            user2!!.followingQuantity = result3.documents.size.toString()
+            user2!!.followerQuantity = result2.documents.size
+            user2!!.followingQuantity = result3.documents.size
             user2!!.postQuantity = result4.documents.size.toString()
             _user.postValue(user2)
+
+            Firebase.firestore.collection("users").document(user2!!.id).update("followerQuantity",user2!!.followerQuantity,"followingQuantity",user2!!.followingQuantity)
 
 
             for(doc in result4.documents){
@@ -84,12 +86,33 @@ class ProfileViewModel: ViewModel(){
                     Follower(postOwner)
                 ).addOnSuccessListener(){
 
+                    viewModelScope.launch(Dispatchers.IO) {
+                        val result2 =
+                            Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).get().await()
+
+                        val cU = result2.toObject(User::class.java)
+                        cU.let {
+                            it!!.followingQuantity = it!!.followingQuantity+1
+                        }
+
+                    }
+
+
                     Firebase.firestore.collection("users").document(postOwner).collection("followers").document(Firebase.auth.currentUser!!.uid).set(
                         Follower(Firebase.auth.currentUser!!.uid)
                     ).addOnSuccessListener(){
 
                       //  Log.e(">>>","Debio crearse")
+                        viewModelScope.launch(Dispatchers.IO) {
+                            val result2 =
+                                Firebase.firestore.collection("users").document(postOwner).get().await()
 
+                            val cU = result2.toObject(User::class.java)
+                            cU.let {
+                                it!!.followerQuantity = it!!.followerQuantity+1
+                            }
+
+                        }
                         _authState.postValue(AuthState(AuthResult.SUCCESS,"sucess"))
                     }
 
