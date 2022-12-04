@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityRecipeBinding
@@ -45,10 +46,14 @@ class RecipeActivity : AppCompatActivity() {
 
         val recipe = intent.extras?.getSerializable("recipe") as? Recipe
         recipeGlobal = recipe!!
+        var gradeDone = false
 
         binding.nameRecipeTV.text = recipe!!.title
         binding.authorNameTV.text = recipe!!.ownerName
         binding.follow.text = "Seguir"
+        binding.scoreTV.text = recipe!!.grade.toString()
+        binding.numReviewsTV.text = "(${recipe!!.gradeAmount}) Reseñas"
+
         Log.e(">>>",recipe!!.ownerName)
         recipeViewModel.getUserData()
         recipeViewModel.getComments(recipe.id)
@@ -73,6 +78,13 @@ class RecipeActivity : AppCompatActivity() {
             }
 
         }
+        recipeViewModel.post.observe(this){
+
+            binding.scoreTV.text = it!!.grade.toString()
+            binding.numReviewsTV.text = "(${it!!.gradeAmount}) Reseñas"
+
+        }
+
         /*
         for (i in 1..10){
             val comment = Comment("img1.jpg", "Carlos Jimmy","",10,"askldhlkashdas","")
@@ -104,6 +116,58 @@ class RecipeActivity : AppCompatActivity() {
             recipeViewModel.addFollower(recipe!!.ownerId,currentUser.id)
 
         }
+        binding.firstStar.setOnClickListener{
+
+            if(!gradeDone){
+                gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,1)
+                binding.firstStar2.isGone
+                binding.firstStar3.isGone
+                binding.firstStar4.isGone
+                binding.firstStar5.isGone
+            }
+
+        }
+        binding.firstStar2.setOnClickListener{
+
+
+            if(!gradeDone){
+            gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,2)
+                binding.firstStar3.isGone
+                binding.firstStar4.isGone
+                binding.firstStar5.isGone
+            }
+        }
+        binding.firstStar3.setOnClickListener{
+
+            if(!gradeDone){
+                gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,3)
+                binding.firstStar4.isGone
+                binding.firstStar5.isGone
+            }
+
+        }
+        binding.firstStar4.setOnClickListener{
+
+
+            if(!gradeDone){
+                gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,4)
+                binding.firstStar5.isGone
+            }
+        }
+        binding.firstStar5.setOnClickListener{
+
+            if(!gradeDone){
+                gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,5)
+
+            }
+
+        }
+
 
     }
 

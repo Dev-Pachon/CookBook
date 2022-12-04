@@ -86,7 +86,9 @@ class ExtendedRecipeAdapter() : RecyclerView.Adapter<ViewHolderExtendedRecipe>()
         }
 
         if(!recipes[position].image.equals("")) {
-            Log.e(">>>","${recipes[position].image} asi se llama el archivo")
+           // Log.e(">>>","${recipes[position].image} asi se llama el archivo")
+            Log.e(">>>","posts/${recipes[position].id}/${recipes[position].image}.jpeg")
+
             var imageref =
                 Firebase.storage.reference.child("posts/${recipes[position].id}/${recipes[position].image}.jpeg")
             imageref.downloadUrl.addOnSuccessListener { Uri ->
