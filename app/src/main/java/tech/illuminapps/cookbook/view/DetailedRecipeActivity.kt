@@ -35,6 +35,7 @@ class DetailedRecipeActivity : AppCompatActivity() {
         binding.ingredientsRV.adapter = adapterIngredient
         binding.recipeStepsRV.adapter = adapterStep
         var recipe = intent.extras?.getSerializable("recipe") as? Recipe
+        adapterStep.postId = recipe!!.id
 
         detailedRecipeViewModel = detailedRecipeViewModel()
         binding.recipeNameTV.text = recipe!!.title
@@ -53,6 +54,10 @@ class DetailedRecipeActivity : AppCompatActivity() {
         Firebase.storage.reference.child("posts/${recipe.id}/${recipe.image}").downloadUrl.addOnSuccessListener {
             Glide.with(this).load(it!!).into(binding.imageView5)
 
+        }
+
+        binding.backBtn.setOnClickListener{
+            onBackPressed()
         }
 
     }

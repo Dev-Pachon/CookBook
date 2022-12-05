@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ViewHolderStepBinding
 import tech.illuminapps.cookbook.view.Step
@@ -29,6 +32,8 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>(),onUriReady{
     private lateinit var currentBinding: ViewHolderStepBinding
 
     private var lastStepModified : Int = -1
+
+     var postId: String?= null
 
     var listener: onGalleryCalled?= null
 
@@ -57,42 +62,56 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>(),onUriReady{
         currentBinding = binding
 
         binding.stepIL.hint = "Paso ${position + 1}"
-       // var currentStep = steps.get(position)
-        binding.editText.let {
+        // var currentStep = steps.get(position)
+        steps[position].content.let {
 
-          it!!.setText(steps[position].content)
+            binding.editText.setText(steps[position].content)
+            binding.deleteBtn.isGone = true
+            binding.addImageBtn.isGone = true
 
         }
+        steps[position].image.let {
 
+            Firebase.storage.reference.child("posts/${postId}/${steps[position].image}").downloadUrl.addOnSuccessListener {
+                Glide.with(context).load(it!!).into(binding.imageViewStep)
+                binding.cardViewStep.isGone = false
+                binding.deleteBtn.isGone = true
+                binding.addImageBtn.isGone = true
 
-        binding.deleteBtn.setOnClickListener {
-            steps.removeAt(position)
-            notifyDataSetChanged()
-        }
-
-        binding.stepIL.setEndIconOnClickListener {
-
-            if (binding.stepIL.editText?.inputType == InputType.TYPE_NULL) {
-                binding.stepIL.editText?.inputType = InputType.TYPE_CLASS_TEXT
-                binding.stepIL.requestFocus()
-                binding.addImageBtn.visibility = View.VISIBLE
-                binding.stepIL.endIconDrawable =
-                    ContextCompat.getDrawable(binding.root.context, R.drawable.done)
-            } else {
-                steps[position].content = binding.stepIL.editText?.text.toString()
-                binding.stepIL.editText?.inputType = InputType.TYPE_NULL
-                binding.stepIL.clearFocus()
-                binding.addImageBtn.visibility = View.INVISIBLE
-                binding.stepIL.endIconDrawable =
-                    ContextCompat.getDrawable(binding.root.context, R.drawable.edit)
             }
-        }
 
-        binding.addImageBtn.setOnClickListener {
 
-            lastStepModified = position
-            currentBinding = binding
-            /*
+
+
+
+            binding.deleteBtn.setOnClickListener {
+                steps.removeAt(position)
+                notifyDataSetChanged()
+            }
+
+            binding.stepIL.setEndIconOnClickListener {
+
+                if (binding.stepIL.editText?.inputType == InputType.TYPE_NULL) {
+                    binding.stepIL.editText?.inputType = InputType.TYPE_CLASS_TEXT
+                    binding.stepIL.requestFocus()
+                    binding.addImageBtn.visibility = View.VISIBLE
+                    binding.stepIL.endIconDrawable =
+                        ContextCompat.getDrawable(binding.root.context, R.drawable.done)
+                } else {
+                    steps[position].content = binding.stepIL.editText?.text.toString()
+                    binding.stepIL.editText?.inputType = InputType.TYPE_NULL
+                    binding.stepIL.clearFocus()
+                    binding.addImageBtn.visibility = View.INVISIBLE
+                    binding.stepIL.endIconDrawable =
+                        ContextCompat.getDrawable(binding.root.context, R.drawable.edit)
+                }
+            }
+
+            binding.addImageBtn.setOnClickListener {
+
+                lastStepModified = position
+                currentBinding = binding
+                /*
             val galLauncher = registerForActivityResult(
                 ActivityResultContracts.StartActivityForResult()
                 ,::onGalleryResult
@@ -100,20 +119,21 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>(),onUriReady{
             )
 
              */
-            listener.let {
-                it?.openGallery()
-               //
-                lastStepModified = position
+                listener.let {
+                    it?.openGallery()
+                    //
+                    lastStepModified = position
+
+                }
 
             }
+            binding.deleteBtn.setOnClickListener {
 
-        }
-        binding.deleteBtn.setOnClickListener {
-
-            steps.remove(steps.get(position))
+                steps.remove(steps.get(position))
 
                 notifyItemRemoved(position);
 
+            }
         }
     }
 
