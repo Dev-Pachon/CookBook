@@ -21,6 +21,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.FragmentMyProfileBinding
+import tech.illuminapps.cookbook.model.Post
 import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
 import tech.illuminapps.cookbook.viewmodel.UserViewModel
@@ -33,6 +34,8 @@ class MyProfileFragment : Fragment() {
     //private var userViewModel: UserViewModel by viewModels()
     private lateinit var userViewModel: UserViewModel
     private lateinit var user:User
+    private lateinit var postrecipe: Post
+
 
     val binding: FragmentMyProfileBinding by lazy {
         FragmentMyProfileBinding.inflate(layoutInflater)
@@ -122,6 +125,7 @@ class MyProfileFragment : Fragment() {
                     userViewModel.logOut(requireActivity())
                     mainActivity.showFragment(loginFragment)
                     true
+                    //Firebase.messaging.unsubscribeFromTopic(postrecipe.userId)
                 }
                 R.id.edit_profile_option -> {
                     startActivity(Intent(binding.root.context, EditProfileActivity::class.java).putExtra("user",user))

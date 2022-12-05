@@ -10,6 +10,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityMainBinding
+import tech.illuminapps.cookbook.util.NotificationUtil
 import tech.illuminapps.cookbook.viewmodel.AuthResult
 import tech.illuminapps.cookbook.viewmodel.AuthState
 import tech.illuminapps.cookbook.viewmodel.FirstInit
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        NotificationUtil.showNotification(this, "Nueva Receta", "Haz clic para ver")
         userViewModel.setPreferences(this)
 
         loginFragment = LoginFragment.newInstance(this)
