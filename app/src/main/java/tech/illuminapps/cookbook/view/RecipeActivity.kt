@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 //import com.google.firebase.messaging.ktx.messaging
@@ -68,7 +70,11 @@ class  RecipeActivity : AppCompatActivity() {
             Glide.with(this).load(it!!).into(binding.authorPfP)
 
         }
-        
+        Firebase.storage.reference.child("users/${Firebase.auth.currentUser!!.uid}").downloadUrl.addOnSuccessListener {
+            Log.e(">>>","Esto deberia funcionar")
+            Glide.with(this).load(it!!).into(binding.authorPfP)
+
+        }
 
         Log.e(">>>",recipe!!.ownerName)
         recipeViewModel.getUserData()
