@@ -11,13 +11,20 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.isGone
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import tech.illuminapps.cookbook.databinding.ActivityCreateRecipeBinding
+import tech.illuminapps.cookbook.model.Post
+import tech.illuminapps.cookbook.util.FCMMessage
+import tech.illuminapps.cookbook.util.HTTPSWebUtilDomi
 import tech.illuminapps.cookbook.viewmodel.CreateRecipeViewModel
 import tech.illuminapps.cookbook.viewmodel.IngredientAdapter
 import tech.illuminapps.cookbook.viewmodel.StepAdapter
@@ -29,6 +36,7 @@ class CreateRecipeActivity : AppCompatActivity(), onGalleryCalled {
     val binding: ActivityCreateRecipeBinding by lazy {
         ActivityCreateRecipeBinding.inflate(layoutInflater)
     }
+    private lateinit var postrecipe: Post
 
     private lateinit var layoutMIngredients : LinearLayoutManager
     private lateinit var layoutMSteps:LinearLayoutManager
@@ -143,7 +151,12 @@ class CreateRecipeActivity : AppCompatActivity(), onGalleryCalled {
             }else{
                 Toast.makeText(this,"Añada una Imagen del resultado final de la receta",Toast.LENGTH_LONG)
             }
-
+            //Notificar al contacto
+            lifecycleScope.launch(Dispatchers.IO){
+                val obj = FCMMessage("/topics/${postrecipe.userId}","Nueva receta")
+                val json = Gson().toJson(obj)
+                HTTPSWebUtilDomi().POSTtoFCM(json)
+            }
 
 
         }

@@ -15,8 +15,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.FragmentMyProfileBinding
+import tech.illuminapps.cookbook.model.Post
 import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
 import tech.illuminapps.cookbook.viewmodel.UserViewModel
 
@@ -27,6 +29,7 @@ class MyProfileFragment : Fragment() {
     private lateinit var loginFragment: LoginFragment
     //private var userViewModel: UserViewModel by viewModels()
     private lateinit var userViewModel: UserViewModel
+    private lateinit var postrecipe: Post
 
 
     val binding: FragmentMyProfileBinding by lazy {
@@ -98,6 +101,7 @@ class MyProfileFragment : Fragment() {
                 R.id.logout_option -> {
                     userViewModel.logOut(requireActivity())
                     mainActivity.showFragment(loginFragment)
+               //     Firebase.messaging.unsubscribeFromTopic(postrecipe.userId)
                     true
                 }
                 R.id.edit_profile_option -> {

@@ -10,19 +10,23 @@ import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityRecipeBinding
+import tech.illuminapps.cookbook.model.Post
 import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
 import tech.illuminapps.cookbook.viewmodel.RecipeCommentAdapter
 import tech.illuminapps.cookbook.viewmodel.RecipeViewModel
 import java.util.*
 
-class RecipeActivity : AppCompatActivity() {
+class  RecipeActivity : AppCompatActivity() {
 
     val binding: ActivityRecipeBinding by lazy {
         ActivityRecipeBinding.inflate(layoutInflater)
     }
+    private lateinit var postrecipe: Post
 
     private lateinit var layoutMComments : LinearLayoutManager
 
@@ -44,6 +48,7 @@ class RecipeActivity : AppCompatActivity() {
 
             Log.e(">>>", "Id de la receta ${recipe!!.id}")
 
+        Firebase.messaging.subscribeToTopic(postrecipe.userId)
         binding.nameRecipeTV.text = recipe!!.title
         binding.authorNameTV.text = recipe!!.ownerName
         recipeViewModel.getUserData()
