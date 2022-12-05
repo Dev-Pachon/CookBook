@@ -15,10 +15,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.ktx.messaging
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.FragmentMyProfileBinding
 import tech.illuminapps.cookbook.model.Post
+import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
 import tech.illuminapps.cookbook.viewmodel.UserViewModel
 
@@ -29,6 +29,7 @@ class MyProfileFragment : Fragment() {
     private lateinit var loginFragment: LoginFragment
     //private var userViewModel: UserViewModel by viewModels()
     private lateinit var userViewModel: UserViewModel
+    private lateinit var user:User
     private lateinit var postrecipe: Post
 
 
@@ -63,8 +64,18 @@ class MyProfileFragment : Fragment() {
 
         binding.myRecipesRV.adapter = adapter
 
-        userViewModel.getUserPost()
+        userViewModel.getUserInfo()
 
+        userViewModel.user.observe(viewLifecycleOwner){
+
+
+            binding.nameTV.text = it.name
+            binding.descriptionTV.text = it.description
+            binding.numRecipesTV.text = it.postQuantity
+            binding.numFollowersTV.text = it.followerQuantity.toString()
+            binding.numFollowingTV.text = it.followingQuantity.toString()
+            user = it!!
+        }
 
         userViewModel.recipes.observe(viewLifecycleOwner){
 
@@ -101,11 +112,11 @@ class MyProfileFragment : Fragment() {
                 R.id.logout_option -> {
                     userViewModel.logOut(requireActivity())
                     mainActivity.showFragment(loginFragment)
-               //     Firebase.messaging.unsubscribeFromTopic(postrecipe.userId)
                     true
+                    //Firebase.messaging.unsubscribeFromTopic(postrecipe.userId)
                 }
                 R.id.edit_profile_option -> {
-                    startActivity(Intent(binding.root.context, EditProfileActivity::class.java))
+                    startActivity(Intent(binding.root.context, EditProfileActivity::class.java).putExtra("user",user))
                     true
                 }
                 else -> false

@@ -2,6 +2,7 @@ package tech.illuminapps.cookbook.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -28,6 +29,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        var userId = intent.getSerializableExtra("userId") as String
 
         layoutMSaved = LinearLayoutManager(binding.root.context)
 
@@ -41,20 +43,43 @@ class ProfileActivity : AppCompatActivity() {
 
         profileViewModel = ProfileViewModel()
 
-
+        binding.followBtn.text = "Seguir"
 
 
         //val recipe = Recipe("img1.jps", " ",true,"","","","")
         //adapter.addRecipe(recipe)
 
-       profileViewModel.getUserPost()
+       profileViewModel.getUserInfo(userId)
+
+        profileViewModel.user.observe(this){
+
+            binding.nameTV.text = it.name
+            binding.descriptionTV.text = it.description
+            binding.numFollowersTV.text = it.followerQuantity.toString()
+            binding.numFollowingTV.text = it.followingQuantity.toString()
+            binding.numRecipesTV.text = it.postQuantity
+        }
 
 
         profileViewModel.recipes.observe(this){
 
             adapter.addRecipe(it)
+           // Log.e(">>>",it.ownerName)
 
         }
+        binding.followBtn.setOnClickListener {
+
+            profileViewModel.addFollower(userId)
+
+        }
+
+
+        profileViewModel.authState.observe(this){
+
+            binding.followBtn.text = "Siguiendo"
+        }
+
+
 
 
 

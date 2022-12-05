@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
@@ -34,6 +36,8 @@ class  RecipeActivity : AppCompatActivity() {
 
     private lateinit var recipeViewModel: RecipeViewModel
 
+    private lateinit var recipeGlobal: Recipe
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -45,12 +49,17 @@ class  RecipeActivity : AppCompatActivity() {
         binding.commentsRV.adapter = adapterComments
 
         val recipe = intent.extras?.getSerializable("recipe") as? Recipe
-
-            Log.e(">>>", "Id de la receta ${recipe!!.id}")
+        recipeGlobal = recipe!!
+        var gradeDone = false
 
         Firebase.messaging.subscribeToTopic(postrecipe.userId)
         binding.nameRecipeTV.text = recipe!!.title
         binding.authorNameTV.text = recipe!!.ownerName
+        binding.follow.text = "Seguir"
+        binding.scoreTV.text = recipe!!.grade.toString()
+        binding.numReviewsTV.text = "(${recipe!!.gradeAmount}) Reseñas"
+
+        Log.e(">>>",recipe!!.ownerName)
         recipeViewModel.getUserData()
         recipeViewModel.getComments(recipe.id)
 
@@ -64,8 +73,23 @@ class  RecipeActivity : AppCompatActivity() {
             adapterComments.addComment(it)
         }
         recipeViewModel.authState.observe(this){
-            binding.follow.text = "Siguiendo"
+
+
+            when(it.message){
+
+                "Seguir" ->     binding.follow.text = "Siguiendo"
+                "Guardar" -> Toast.makeText(this,"Se ha guardado correctamente",Toast.LENGTH_LONG)
+
+            }
+
         }
+        recipeViewModel.post.observe(this){
+
+            binding.scoreTV.text = it!!.grade.toString()
+            binding.numReviewsTV.text = "(${it!!.gradeAmount}) Reseñas"
+
+        }
+
         /*
         for (i in 1..10){
             val comment = Comment("img1.jpg", "Carlos Jimmy","",10,"askldhlkashdas","")
@@ -74,7 +98,7 @@ class  RecipeActivity : AppCompatActivity() {
         */
 
         binding.startRecipeBtn.setOnClickListener {
-            startActivity(Intent(binding.root.context, DetailedRecipeActivity::class.java))
+            startActivity(Intent(binding.root.context, DetailedRecipeActivity::class.java).putExtra("recipe",recipe!!))
         }
 
         binding.backBtn.setOnClickListener {
@@ -97,6 +121,58 @@ class  RecipeActivity : AppCompatActivity() {
             recipeViewModel.addFollower(recipe!!.ownerId,currentUser.id)
 
         }
+        binding.firstStar.setOnClickListener{
+
+            if(!gradeDone){
+                gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,1)
+                binding.firstStar2.isGone
+                binding.firstStar3.isGone
+                binding.firstStar4.isGone
+                binding.firstStar5.isGone
+            }
+
+        }
+        binding.firstStar2.setOnClickListener{
+
+
+            if(!gradeDone){
+            gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,2)
+                binding.firstStar3.isGone
+                binding.firstStar4.isGone
+                binding.firstStar5.isGone
+            }
+        }
+        binding.firstStar3.setOnClickListener{
+
+            if(!gradeDone){
+                gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,3)
+                binding.firstStar4.isGone
+                binding.firstStar5.isGone
+            }
+
+        }
+        binding.firstStar4.setOnClickListener{
+
+
+            if(!gradeDone){
+                gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,4)
+                binding.firstStar5.isGone
+            }
+        }
+        binding.firstStar5.setOnClickListener{
+
+            if(!gradeDone){
+                gradeDone = true
+                recipeViewModel.addGrade(recipeGlobal.id,5)
+
+            }
+
+        }
+
 
     }
 
@@ -118,7 +194,7 @@ class  RecipeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.save_recipe_option -> {
-
+                    recipeViewModel.saveRecipe(recipeGlobal.id)
                     true
                 }
                 else -> false

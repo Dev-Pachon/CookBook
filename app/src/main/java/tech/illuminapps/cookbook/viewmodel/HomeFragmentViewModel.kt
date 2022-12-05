@@ -6,15 +6,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import tech.illuminapps.cookbook.model.Follower
 import tech.illuminapps.cookbook.model.Post
+import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.view.Ingredient
+import tech.illuminapps.cookbook.view.PopularProfile
 import tech.illuminapps.cookbook.view.Recipe
 import tech.illuminapps.cookbook.view.Step
 import kotlin.math.log
@@ -26,6 +28,12 @@ class HomeFragmentViewModel: ViewModel()  {
 
     private val _recipes = MutableLiveData(Recipe())
     val recipes: LiveData<Recipe> get() = _recipes
+
+    private val _recipesTrending = MutableLiveData(Recipe())
+    val recipesTrending: LiveData<Recipe> get() = _recipesTrending
+
+    private val _popularProfile = MutableLiveData(PopularProfile())
+    val popularProfile: LiveData<PopularProfile> get() = _popularProfile
 
    // var recipes: ArrayList<Recipe> = arrayListOf()
 
@@ -89,7 +97,7 @@ class HomeFragmentViewModel: ViewModel()  {
                             val postUser = result2.toObject(tech.illuminapps.cookbook.model.User::class.java)
 
 
-                            var recipe = Recipe(post.name,post.mainImage,false, postUser!!.name,postUser!!.image,postUser!!.id,post!!.id)
+                            var recipe = Recipe(post!!.name,post!!.mainImage,false, postUser!!.name,postUser!!.image,postUser!!.id,post!!.id)
                             //Log.e(">>>",recipe.toString())
                             // recipes2.add(recipe)
                             _recipes.postValue(recipe)
@@ -97,6 +105,44 @@ class HomeFragmentViewModel: ViewModel()  {
                         }
                     }
 
+
+
+
+                    }
+
+
+                }
+
+                val result2 = Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).collection("following").get().await()
+
+                for(doc in result2.documents){
+
+                    var following = doc.toObject(Follower::class.java)
+
+                    following.let {
+
+                        val result3 = Firebase.firestore.collection("posts").whereEqualTo("userdId",it!!.id).get().await()
+
+                        for(doc2 in result3.documents){
+
+                            var post = doc2.toObject(Post::class.java)
+
+                            if(!posts.contains(post)){
+
+                                val result4  =  Firebase.firestore.collection("users").document(post!!.userId).get().await()
+
+                                val postUser = result4.toObject(tech.illuminapps.cookbook.model.User::class.java)
+
+
+                                var recipe = Recipe(post!!.name,post!!.mainImage,false, postUser!!.name,postUser!!.image,postUser!!.id,post!!.id)
+                                //Log.e(">>>",recipe.toString())
+                                // recipes2.add(recipe)
+                                _recipes.postValue(recipe)
+
+                            }
+
+
+                        }
 
 
 
@@ -116,6 +162,64 @@ class HomeFragmentViewModel: ViewModel()  {
 
 
         }
+    fun getTrendingPost(){
+
+        viewModelScope.launch(Dispatchers.IO){
+
+            val result = Firebase.firestore.collection("posts").orderBy("grade").limit(10).get().await()
+
+            for(doc in result.documents){
+                val post = doc.toObject(Post::class.java)
+
+                 post.let {
+
+                     val result2  =  Firebase.firestore.collection("users").document(it!!.userId).get().await()
+
+                     val postUser = result2.toObject(tech.illuminapps.cookbook.model.User::class.java)
+
+
+                     var recipe = Recipe(post!!.name,post!!.mainImage,false, postUser!!.name,postUser!!.image,postUser!!.id,post!!.id)
+                     //Log.e(">>>",recipe.toString())
+                     // recipes2.add(recipe)
+                     _recipesTrending.postValue(recipe)
+
+                 }
+
+                }
+
+        }
+
+
+
+
+    }
+    fun getPopularProfiles(){
+
+        viewModelScope.launch(Dispatchers.IO){
+
+            val result = Firebase.firestore.collection("users").orderBy("followerQuantity").limit(10).get().await()
+
+            for(doc in result.documents){
+
+                val user = doc.toObject(User::class.java)
+                user.let {
+                    Log.e(">>>", "Usuario ${it!!.name}")
+                    val popularProfile = PopularProfile(it!!.id,it!!.name,it!!.image)
+                    _popularProfile.postValue(popularProfile)
+                }
+
+
+
+            }
+
+
+
+        }
+
+
+    }
+
+
 
     }
 

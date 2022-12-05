@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import tech.illuminapps.cookbook.model.Post
 import tech.illuminapps.cookbook.model.SharedPreferences
+import tech.illuminapps.cookbook.model.User
 import tech.illuminapps.cookbook.view.Recipe
 import java.io.File
 
@@ -22,6 +23,9 @@ class UserViewModel : ViewModel() {
 
     private val _recipes = MutableLiveData(Recipe())
     val recipes: LiveData<Recipe> get() = _recipes
+
+    private val _user = MutableLiveData(User())
+    val user: LiveData<User> get() = _user
 
     private val _authState = MutableLiveData(
         AuthState(AuthResult.IDLE, "Starting...")
@@ -54,18 +58,28 @@ class UserViewModel : ViewModel() {
         _firstInit.value = SharedPreferences.InitState(activity)
         _authState.value = AuthState(SharedPreferences.AuthState(activity),"")
     }
-    fun getUserPost(){
-
-        Log.e(">>>","Esta entrando al metodo")
+    fun getUserInfo(){
 
         viewModelScope.launch(Dispatchers.IO) {
 
-            Log.e(">>>","Deberia mostrar el uid ${Firebase.auth.currentUser!!.uid.toString()}")
-            val result = Firebase.firestore.collection("posts").whereEqualTo("userId",
+        val result = Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).get().await()
+
+            val user2 = result.toObject(tech.illuminapps.cookbook.model.User::class.java)
+
+            val result2 = Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).collection("followers").get().await()
+
+            val result3 = Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).collection("following").get().await()
+
+            val result4 = Firebase.firestore.collection("posts").whereEqualTo("userId",
                 Firebase.auth.currentUser!!.uid.toString()).get().await()
 
+            user2!!.followerQuantity = result2.documents.size
+            user2!!.followingQuantity = result3.documents.size
+            user2!!.postQuantity = result4.documents.size.toString()
+            _user.postValue(user2)
 
-            for(doc in result.documents){
+
+            for(doc in result4.documents){
 
                 val post = doc.toObject(Post::class.java)
 
@@ -86,6 +100,7 @@ class UserViewModel : ViewModel() {
         }
 
     }
+
 
 }
 
