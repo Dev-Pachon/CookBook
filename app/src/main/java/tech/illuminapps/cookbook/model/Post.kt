@@ -9,5 +9,5 @@ data class Post(
     var mainImage: String = "",
     var grades: ArrayList<Int> = arrayListOf(),
     var gradeAmount: Int = 0,
-    var grade: Int = 0
+    var grade: Double = 0.0
 )

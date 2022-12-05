@@ -3,6 +3,9 @@ package tech.illuminapps.cookbook.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import tech.illuminapps.cookbook.databinding.ActivityDetailedRecipeBinding
 import tech.illuminapps.cookbook.viewmodel.IngredientAdapter
 import tech.illuminapps.cookbook.viewmodel.StepAdapter
@@ -45,6 +48,10 @@ class DetailedRecipeActivity : AppCompatActivity() {
         detailedRecipeViewModel.ingredient.observe(this){
 
             adapterIngredient.addIngredient(it!!)
+
+        }
+        Firebase.storage.reference.child("posts/${recipe.id}/${recipe.image}").downloadUrl.addOnSuccessListener {
+            Glide.with(this).load(it!!).into(binding.imageView5)
 
         }
 

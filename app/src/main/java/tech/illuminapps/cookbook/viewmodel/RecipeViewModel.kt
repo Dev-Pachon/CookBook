@@ -160,7 +160,7 @@ class RecipeViewModel: ViewModel() {
 
             post.let {
                 it!!.grades.add(grade)
-                var average: Int = 0
+                var average: Double = 0.0
                 for(grade in it!!.grades){
 
                     average+= grade

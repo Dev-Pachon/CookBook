@@ -58,6 +58,11 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>(),onUriReady{
 
         binding.stepIL.hint = "Paso ${position + 1}"
        // var currentStep = steps.get(position)
+        binding.editText.let {
+
+          it!!.setText(steps[position].content)
+
+        }
 
 
         binding.deleteBtn.setOnClickListener {

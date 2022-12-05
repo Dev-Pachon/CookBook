@@ -35,7 +35,7 @@ class IngredientAdapter : RecyclerView.Adapter<ViewHolderIngredient>() {
     override fun onBindViewHolder(holder: ViewHolderIngredient, position: Int) {
         binding.nameTV.text = ingredients[position].nombre
         binding.quantityTV.text = ingredients[position].quantity.toString()
-        binding.ingredientView.isGone = true
+      //  binding.ingredientView.isGone
       //  binding.ingredientCV.isGone = true
     }
 

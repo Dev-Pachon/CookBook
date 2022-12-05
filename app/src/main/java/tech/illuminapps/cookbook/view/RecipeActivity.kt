@@ -17,7 +17,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.google.firebase.messaging.ktx.messaging
+//import com.google.firebase.messaging.ktx.messaging
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityRecipeBinding
 import tech.illuminapps.cookbook.model.Post
@@ -56,11 +56,11 @@ class  RecipeActivity : AppCompatActivity() {
         recipeGlobal = recipe!!
         var gradeDone = false
 
-        Firebase.messaging.subscribeToTopic(postrecipe.userId)
+ //       Firebase.messaging.subscribeToTopic(postrecipe.userId)
         binding.nameRecipeTV.text = recipe!!.title
         binding.authorNameTV.text = recipe!!.ownerName
         binding.follow.text = "Seguir"
-        binding.scoreTV.text = recipe!!.grade.toString()
+        binding.scoreTV.text = "${recipe!!.grade}"
         binding.numReviewsTV.text = "(${recipe!!.gradeAmount}) Reseñas"
         Firebase.storage.reference.child("posts/${recipe.id}/${recipe.image}").downloadUrl.addOnSuccessListener {
             Glide.with(this).load(it!!).into(binding.imageView9)
