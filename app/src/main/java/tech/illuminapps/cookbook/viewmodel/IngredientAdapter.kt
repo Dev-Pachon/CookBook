@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import tech.illuminapps.cookbook.databinding.ViewHolderIngredientBinding
 import tech.illuminapps.cookbook.databinding.ViewHolderRecipeExpandedBinding
 import tech.illuminapps.cookbook.view.Ingredient
@@ -37,6 +40,11 @@ class IngredientAdapter : RecyclerView.Adapter<ViewHolderIngredient>() {
         binding.quantityTV.text = ingredients[position].quantity.toString()
       //  binding.ingredientView.isGone
       //  binding.ingredientCV.isGone = true
+
+        Firebase.storage.reference.child("ingredients/${ingredients[position].nombre}").downloadUrl.addOnSuccessListener {
+            Glide.with(context).load(it!!).into(binding.ingredientView)
+
+        }
     }
 
     override fun getItemCount(): Int {
