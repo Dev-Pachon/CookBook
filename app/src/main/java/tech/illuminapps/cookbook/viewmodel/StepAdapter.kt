@@ -63,13 +63,18 @@ class StepAdapter : RecyclerView.Adapter<ViewHolderStep>(),onUriReady{
 
         binding.stepIL.hint = "Paso ${position + 1}"
         // var currentStep = steps.get(position)
-        steps[position].content.let {
 
-            binding.editText.setText(steps[position].content)
-            binding.deleteBtn.isGone = true
-            binding.addImageBtn.isGone = true
+            if(!steps[position].content.contains("android")){
 
-        }
+                if(!steps[position].content.equals(""))
+                Log.e(">>>",steps[position].content)
+                binding.editText.setText(steps[position].content)
+                //  binding.deleteBtn.isGone = true
+                // binding.addImageBtn.isGone = true
+            }
+
+
+
         steps[position].image.let {
 
             Firebase.storage.reference.child("posts/${postId}/${steps[position].image}").downloadUrl.addOnSuccessListener {
