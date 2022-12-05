@@ -12,7 +12,9 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 //import com.google.firebase.messaging.ktx.messaging
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityRecipeBinding
@@ -58,6 +60,15 @@ class  RecipeActivity : AppCompatActivity() {
         binding.follow.text = "Seguir"
         binding.scoreTV.text = recipe!!.grade.toString()
         binding.numReviewsTV.text = "(${recipe!!.gradeAmount}) Reseñas"
+        Firebase.storage.reference.child("posts/${recipe.id}/${recipe.image}").downloadUrl.addOnSuccessListener {
+            Glide.with(this).load(it!!).into(binding.imageView9)
+
+        }
+        Firebase.storage.reference.child("users/${recipe.ownerId}").downloadUrl.addOnSuccessListener {
+            Glide.with(this).load(it!!).into(binding.authorPfP)
+
+        }
+        
 
         Log.e(">>>",recipe!!.ownerName)
         recipeViewModel.getUserData()
