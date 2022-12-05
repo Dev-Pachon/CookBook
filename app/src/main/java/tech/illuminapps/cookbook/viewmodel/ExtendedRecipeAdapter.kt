@@ -29,6 +29,7 @@ class ExtendedRecipeAdapter() : RecyclerView.Adapter<ViewHolderExtendedRecipe>()
     private val recipes: ArrayList<Recipe> = ArrayList()
 
 
+
     fun addRecipe(recipe: Recipe) {
         recipes.add(recipe)
         notifyItemInserted(itemCount)
@@ -86,17 +87,15 @@ class ExtendedRecipeAdapter() : RecyclerView.Adapter<ViewHolderExtendedRecipe>()
         }
 
         if(!recipes[position].image.equals("")) {
-           // Log.e(">>>","${recipes[position].image} asi se llama el archivo")
-            Log.e(">>>","posts/${recipes[position].id}/${recipes[position].image}.jpeg")
+            // Log.e(">>>","${recipes[position].image} asi se llama el archivo")
+            Log.e(">>>", "posts/${recipes[position].id}/${recipes[position].image}.jpeg")
 
-            var imageref =
-                Firebase.storage.reference.child("posts/${recipes[position].id}/${recipes[position].image}.jpeg")
-            imageref.downloadUrl.addOnSuccessListener { Uri ->
+            Firebase.storage.reference.child("posts/${recipes[position].id}/${recipes[position].image}").downloadUrl.addOnSuccessListener {
+                Glide.with(context).load(it!!).into(binding.imageView11)
 
-                Log.e(">>>","Esta descargando la imagen")
-                val imageURL = Uri.toString()
-                Glide.with(context).load(recipes[position].image).into(binding.imageView11)
-
+            }
+            Firebase.storage.reference.child("users/${recipes[position].ownerId}").downloadUrl.addOnSuccessListener {
+                Glide.with(context).load(it!!).into(binding.imageView12)
 
             }
         }

@@ -85,11 +85,14 @@ class MyProfileFragment : Fragment() {
 
             }
 
+
         }
 
         userViewModel.recipes.observe(viewLifecycleOwner){
 
             adapter.addRecipe(it)
+
+
         }
 
 

@@ -27,7 +27,7 @@ object NotificationUtil {
         }
 
         val intent = Intent(context, RecipeActivity::class.java)
-        val pending = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pending = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_IMMUTABLE)
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setDefaults(Notification.DEFAULT_ALL)
