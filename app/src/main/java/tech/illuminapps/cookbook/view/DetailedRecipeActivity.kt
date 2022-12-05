@@ -33,6 +33,7 @@ class DetailedRecipeActivity : AppCompatActivity() {
         binding.recipeStepsRV.adapter = adapterStep
         var recipe = intent.extras?.getSerializable("recipe") as? Recipe
 
+        detailedRecipeViewModel = detailedRecipeViewModel()
         binding.recipeNameTV.text = recipe!!.title
         detailedRecipeViewModel.getRecipeInfo(recipe!!.id)
 
