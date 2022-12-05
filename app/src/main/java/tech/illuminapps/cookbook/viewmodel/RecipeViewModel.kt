@@ -52,7 +52,7 @@ class RecipeViewModel: ViewModel() {
 
             Firebase.firestore.collection("posts").document(postId).collection("comments").document(comment.id).set(comment).addOnSuccessListener {
 
-                Log.e(">>>", "Comentario a;adido en el post ${postId}")
+             //   Log.e(">>>", "Comentario a;adido en el post ${postId}")
             }
 
         }
@@ -62,14 +62,21 @@ class RecipeViewModel: ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
 
-            Log.e(">>>",postId)
+           // Log.e(">>>",postId)
             val result = Firebase.firestore.collection("posts")
                 .document(postId).collection("comments").get().await()
             for(doc in result.documents){
 
                 val com = doc.toObject(Comment::class.java)
                 com?.let {
-                    Log.e(">>>","${it.content} Aqui deberia salir algo" )
+                   // Log.e(">>>","${it.content} Aqui deberia salir algo" )
+                    val result2 = Firebase.firestore.collection("users").document(com.authorId).get().await()
+                    val user2 = result2.toObject(User::class.java)
+                    Log.e(">>>", "El nombre del author es ${user2!!.name}")
+                   user2.let {
+                       com.authorName = it!!.name
+                   }
+
                     _comment.postValue(com)
                 }
 

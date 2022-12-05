@@ -7,6 +7,9 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.ActivityProfileBinding
 import tech.illuminapps.cookbook.viewmodel.ExtendedRecipeAdapter
@@ -45,6 +48,10 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.followBtn.text = "Seguir"
 
+        Firebase.storage.reference.child("users/${userId}").downloadUrl.addOnSuccessListener{
+            Glide.with(this).load(it!!).into(binding.userPfp)
+
+        }
 
         //val recipe = Recipe("img1.jps", " ",true,"","","","")
         //adapter.addRecipe(recipe)

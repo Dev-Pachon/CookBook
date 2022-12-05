@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import tech.illuminapps.cookbook.databinding.ViewHolderPopularProfilesBinding
 import tech.illuminapps.cookbook.databinding.ViewHolderRecipeExpandedBinding
 import tech.illuminapps.cookbook.view.*
@@ -40,6 +43,11 @@ class PopularProfileAdapter : RecyclerView.Adapter<ViewHolderPopularProfile>() {
                 null
             )
         }
+        Firebase.storage.reference.child("users/${profiles[position].id}").downloadUrl.addOnSuccessListener{
+            Glide.with(context).load(it!!).into(binding.imageView13)
+
+        }
+
     }
 
     override fun getItemCount(): Int {

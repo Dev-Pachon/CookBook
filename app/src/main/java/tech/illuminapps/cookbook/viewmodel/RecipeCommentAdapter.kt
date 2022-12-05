@@ -44,7 +44,7 @@ class RecipeCommentAdapter : RecyclerView.Adapter<ViewHolderRecipeComment>() {
         binding.authorNameTV.text = comments[position].authorName
         binding.commentTV.text = comments[position].content
         val numLikes = comments[position].numLikes
-        "$numLikes me gustas".also { binding.numLikesTV.text = it }
+        //"$numLikes me gustas".also { binding.numLikesTV.text = it }
         binding.imageView14.setImageDrawable(ContextCompat.getDrawable(binding.root.context, R.drawable.daily_activities_g698a2baf4_1920_1))
         Firebase.storage.reference.child("users/${comments[position].authorId}").downloadUrl.addOnSuccessListener {
             //Log.e(">>>","Esto deberia funcionar")

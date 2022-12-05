@@ -23,15 +23,6 @@
             app:srcCompat="@drawable/cartoon_gc6b1d9dec_1280_1" />
     </androidx.cardview.widget.CardView>
 
-    <CheckBox
-        android:id="@+id/likeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/sl_heart"
-        app:buttonTint="@color/red_700"
-        app:layout_constraintStart_toStartOf="@+id/commentTV"
-        app:layout_constraintTop_toBottomOf="@+id/commentTV" />
-
     <TextView
         android:id="@+id/commentTV"
         android:layout_width="0dp"
@@ -42,15 +33,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/authorCommentCV"
         app:layout_constraintTop_toBottomOf="@+id/authorCommentCV" />
-
-    <TextView
-        android:id="@+id/numLikesTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="10 me gustas"
-        app:layout_constraintBottom_toBottomOf="@+id/likeBtn"
-        app:layout_constraintStart_toEndOf="@+id/likeBtn"
-        app:layout_constraintTop_toTopOf="@+id/likeBtn" />
 
     <TextView
         android:id="@+id/authorNameTV"
