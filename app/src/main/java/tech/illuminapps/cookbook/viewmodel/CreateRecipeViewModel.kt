@@ -38,7 +38,8 @@ class CreateRecipeViewModel: ViewModel() {
 
          Firebase.firestore.collection("posts").document(uid).set(post)
 
-            Firebase.storage.reference.child("posts").child(uid).child(file.name).putFile(mainImage)
+            //Firebase.storage.reference.child("posts").child(uid).child(file.name).putFile(mainImage)
+            Firebase.storage.reference.child("posts").child(uid).putFile(mainImage)
 
 
             Log.e(">>>",ingredients.toString())

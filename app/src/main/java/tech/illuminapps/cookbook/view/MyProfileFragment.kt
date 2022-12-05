@@ -2,6 +2,7 @@ package tech.illuminapps.cookbook.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -13,8 +14,11 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import tech.illuminapps.cookbook.R
 import tech.illuminapps.cookbook.databinding.FragmentMyProfileBinding
 import tech.illuminapps.cookbook.model.User
@@ -48,7 +52,6 @@ class MyProfileFragment : Fragment() {
             showMenu(binding.menuBtn, R.menu.profile_menu)
         }
 
-
         layoutMSaved = LinearLayoutManager(binding.root.context)
 
         binding.myRecipesRV.layoutManager = layoutMSaved
@@ -72,12 +75,21 @@ class MyProfileFragment : Fragment() {
             binding.numFollowersTV.text = it.followerQuantity.toString()
             binding.numFollowingTV.text = it.followingQuantity.toString()
             user = it!!
+
+            //val gsReference = Firebase.storage.getReferenceFromUrl("gs://bucket/users/${it.id}.jpg")
+            Firebase.storage.reference.child("users/${it.id}").downloadUrl.addOnSuccessListener{
+                Glide.with(mainActivity).load(it!!).into(binding.pfp)
+
+            }
+
         }
 
         userViewModel.recipes.observe(viewLifecycleOwner){
 
             adapter.addRecipe(it)
         }
+
+
 
         /*
         for (i in 1..5){

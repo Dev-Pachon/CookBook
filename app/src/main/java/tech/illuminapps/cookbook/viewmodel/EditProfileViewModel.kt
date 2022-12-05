@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class EditProfileViewModel:ViewModel() {
 
@@ -26,7 +27,7 @@ class EditProfileViewModel:ViewModel() {
             //Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid).update("followedCategories",followedCategories)
 
 
-            Firebase.storage.reference.child("users").child(Firebase.auth.currentUser!!.uid).child(pfp.toString()).putFile(pfp)
+            Firebase.storage.reference.child("users").child(Firebase.auth.currentUser!!.uid).putFile(pfp).await()
                 //    .child(pfp.toString()).putFile(pfp)
 
 
